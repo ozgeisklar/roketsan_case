@@ -1,0 +1,39 @@
+# Kaynak videolar (1.7 GB). Vaka calismasinin girdi verisi, repoda tutulmuyor.
+archive/
+
+# Baseline kosularinda uretilen isaretlenmis videolar (~13.4 GB).
+# yolo11baseline_performance.py ve dinobaseline_performance.py ile yeniden uretilebilir.
+results/baseline_*/
+
+# Model agirliklari. Ultralytics ve HuggingFace'ten indirilir.
+*.pt
+*.pth
+
+# Etiketli kare paketleri. Etiketlerin kendisi dataset/*/annotations altinda
+# surumlu tutuluyor; gorseller prepare_test_set.py ile videolardan yeniden
+# uretilebilir cunku dosya adlari video ve kare numarasini icerir
+# (ornek: DJI_0574_f000370.jpg).
+active_learning_training.zip
+dataset/**/images/
+
+# Egitim ciktilari (Kaggle'da uretilir)
+runs/
+runs_yolo_active/
+runs_dino_active/
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Kimlik bilgileri
+.env
+.env.*
+*.pem
+kaggle.json
+
+# Gecici dogrulama ciktilari
+_smoke_tmp/
+_verify_tmp/

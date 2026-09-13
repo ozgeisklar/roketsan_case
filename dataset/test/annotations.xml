@@ -1,0 +1,1411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<annotations>
+  <version>1.1</version>
+  <meta>
+    <task>
+      <id>1</id>
+      <name>drone_videos</name>
+      <size>100</size>
+      <mode>annotation</mode>
+      <overlap>0</overlap>
+      <bugtracker></bugtracker>
+      <created>2026-09-12 15:29:56.541412+00:00</created>
+      <updated>2026-09-12 21:29:29.962787+00:00</updated>
+      <subset>default</subset>
+      <start_frame>0</start_frame>
+      <stop_frame>99</stop_frame>
+      <frame_filter></frame_filter>
+      <segments>
+        <segment>
+          <id>1</id>
+          <start>0</start>
+          <stop>99</stop>
+          <url>http://localhost:8080/api/tasks/1/dataset/export/api/jobs/1</url>
+        </segment>
+      </segments>
+      <owner>
+        <username>ozgeisklar</username>
+        <email>ozgeisklar@gmail.com</email>
+      </owner>
+      <assignee></assignee>
+      <labels>
+        <label>
+          <name>person</name>
+          <color>#fa3253</color>
+          <type>any</type>
+          <attributes>
+          </attributes>
+        </label>
+      </labels>
+    </task>
+    <dumped>2026-09-12 21:43:12.146103+00:00</dumped>
+  </meta>
+  <image id="0" name="DJI_0596_f000000.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="2058.05" ytl="1215.74" xbr="2084.82" ybr="1246.17" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2063.98" ytl="1237.83" xbr="2076.91" ybr="1272.82" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2051.62" ytl="1377.35" xbr="2064.75" ybr="1393.57" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2119.14" ytl="1235.51" xbr="2136.21" ybr="1272.64" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2095.94" ytl="1395.52" xbr="2114.36" ybr="1439.61" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2183.87" ytl="1508.39" xbr="2197.73" ybr="1539.16" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="3342.61" ytl="0.00" xbr="3359.17" ybr="13.04" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2194.04" ytl="1428.39" xbr="2207.23" ybr="1452.90" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2147.99" ytl="1452.78" xbr="2163.06" ybr="1487.86" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2096.94" ytl="1310.32" xbr="2162.25" ybr="1438.46" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2137.33" ytl="1450.87" xbr="2162.65" ybr="1488.36" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1996.72" ytl="1311.34" xbr="2035.31" ybr="1360.44" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2118.23" ytl="1190.96" xbr="2131.54" ybr="1217.32" z_order="0">
+    </box>
+  </image>
+  <image id="1" name="DJI_0596_f000030.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="2103.82" ytl="1304.43" xbr="2128.51" ybr="1343.77" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2066.35" ytl="1122.69" xbr="2080.79" ybr="1150.59" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1992.75" ytl="1229.50" xbr="2013.77" ybr="1251.60" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="2100.60" ytl="1329.40" xbr="2168.64" ybr="1371.52" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2074.92" ytl="1295.53" xbr="2135.54" ybr="1345.07" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2089.60" ytl="1295.94" xbr="2114.27" ybr="1325.37" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2153.17" ytl="1309.68" xbr="2166.68" ybr="1343.26" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2075.29" ytl="1286.46" xbr="2091.91" ybr="1326.67" z_order="0">
+    </box>
+  </image>
+  <image id="2" name="DJI_0596_f000060.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1950.34" ytl="1133.80" xbr="1961.92" ybr="1151.61" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2096.82" ytl="1129.01" xbr="2110.07" ybr="1156.29" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2018.05" ytl="1177.82" xbr="2033.78" ybr="1219.12" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2090.30" ytl="1171.74" xbr="2111.94" ybr="1222.64" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1991.81" ytl="1043.29" xbr="2005.63" ybr="1074.00" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2003.20" ytl="1140.71" xbr="2016.65" ybr="1174.78" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2062.21" ytl="1237.78" xbr="2084.94" ybr="1270.76" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2014.42" ytl="1024.33" xbr="2025.18" ybr="1048.68" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="2119.15" ytl="1200.81" xbr="2133.94" ybr="1227.54" z_order="0">
+    </box>
+  </image>
+  <image id="3" name="DJI_0596_f000090.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1952.42" ytl="1108.00" xbr="1980.49" ybr="1180.36" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1916.62" ytl="1091.50" xbr="1931.33" ybr="1132.85" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1902.37" ytl="1057.42" xbr="1918.52" ybr="1090.75" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1918.20" ytl="944.48" xbr="1932.14" ybr="968.29" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1896.75" ytl="962.80" xbr="1908.01" ybr="991.61" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1902.57" ytl="943.73" xbr="1914.81" ybr="965.73" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1975.60" ytl="1028.67" xbr="1988.81" ybr="1064.53" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1951.40" ytl="1038.27" xbr="1963.35" ybr="1058.13" z_order="0">
+    </box>
+  </image>
+  <image id="4" name="DJI_0596_f000120.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1777.28" ytl="870.62" xbr="1789.61" ybr="896.03" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1756.63" ytl="982.36" xbr="1772.17" ybr="1015.39" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1772.85" ytl="1011.87" xbr="1787.59" ybr="1053.46" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1811.33" ytl="840.19" xbr="1827.22" ybr="882.70" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1841.98" ytl="1018.98" xbr="1857.47" ybr="1064.68" z_order="0">
+    </box>
+  </image>
+  <image id="5" name="DJI_0596_f000150.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1614.28" ytl="924.77" xbr="1629.78" ybr="958.64" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1699.45" ytl="960.37" xbr="1717.07" ybr="996.43" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1621.93" ytl="954.41" xbr="1637.93" ybr="994.66" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1606.73" ytl="648.41" xbr="1647.04" ybr="690.88" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1626.20" ytl="801.60" xbr="1657.70" ybr="861.06" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1676.43" ytl="787.62" xbr="1692.00" ybr="829.11" z_order="0">
+    </box>
+  </image>
+  <image id="6" name="DJI_0596_f000180.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1548.59" ytl="836.21" xbr="1562.72" ybr="882.26" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1522.52" ytl="973.15" xbr="1540.15" ybr="1019.16" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1603.52" ytl="928.10" xbr="1619.98" ybr="963.10" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1520.60" ytl="838.98" xbr="1539.50" ybr="879.31" z_order="0">
+    </box>
+  </image>
+  <image id="7" name="DJI_0596_f000210.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1553.67" ytl="917.34" xbr="1569.81" ybr="965.84" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1607.42" ytl="1002.69" xbr="1638.20" ybr="1063.81" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1514.21" ytl="1058.56" xbr="1531.44" ybr="1108.86" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1567.60" ytl="1063.51" xbr="1602.70" ybr="1108.80" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1512.81" ytl="1030.94" xbr="1528.55" ybr="1068.34" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1977.72" ytl="0.43" xbr="2040.49" ybr="44.74" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1986.29" ytl="24.31" xbr="2010.55" ybr="36.85" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1982.91" ytl="25.00" xbr="1998.61" ybr="36.81" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1524.47" ytl="916.42" xbr="1543.28" ybr="953.22" z_order="0">
+    </box>
+  </image>
+  <image id="8" name="DJI_0596_f000240.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1657.78" ytl="1038.84" xbr="1680.20" ybr="1097.97" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1624.93" ytl="898.79" xbr="1645.70" ybr="948.51" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1604.39" ytl="1040.37" xbr="1623.86" ybr="1094.11" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1664.12" ytl="902.59" xbr="1678.44" ybr="944.11" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1706.39" ytl="1003.51" xbr="1722.53" ybr="1052.58" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1691.27" ytl="875.90" xbr="1708.47" ybr="916.58" z_order="0">
+    </box>
+  </image>
+  <image id="9" name="DJI_0596_f000270.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1588.92" ytl="1039.47" xbr="1602.92" ybr="1070.81" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1688.98" ytl="1026.96" xbr="1704.38" ybr="1065.75" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1576.51" ytl="1059.15" xbr="1597.07" ybr="1109.81" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1638.66" ytl="1024.09" xbr="1655.02" ybr="1046.96" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1548.96" ytl="1072.77" xbr="1566.09" ybr="1096.57" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1506.06" ytl="1011.96" xbr="1535.71" ybr="1054.28" z_order="0">
+    </box>
+  </image>
+  <image id="10" name="DJI_0596_f000300.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1646.77" ytl="930.89" xbr="1662.60" ybr="975.39" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1722.38" ytl="1049.91" xbr="1752.87" ybr="1101.29" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1678.51" ytl="957.62" xbr="1700.38" ybr="999.67" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1623.95" ytl="928.88" xbr="1643.29" ybr="957.34" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1721.53" ytl="937.59" xbr="1735.42" ybr="971.94" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1770.69" ytl="895.99" xbr="1788.42" ybr="923.03" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1671.62" ytl="1075.99" xbr="1700.70" ybr="1128.72" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1648.74" ytl="931.35" xbr="1660.97" ybr="955.19" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1720.56" ytl="945.80" xbr="1737.65" ybr="992.82" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1774.07" ytl="1061.75" xbr="1791.46" ybr="1101.05" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1693.57" ytl="936.76" xbr="1715.41" ybr="987.18" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1747.48" ytl="945.49" xbr="1767.31" ybr="991.45" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1655.74" ytl="1076.86" xbr="1676.93" ybr="1132.84" z_order="0">
+    </box>
+  </image>
+  <image id="11" name="DJI_0596_f000330.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1718.72" ytl="963.90" xbr="1738.35" ybr="994.41" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1855.90" ytl="1121.52" xbr="1877.93" ybr="1157.19" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1750.21" ytl="1114.52" xbr="1773.76" ybr="1172.83" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1777.49" ytl="990.42" xbr="1799.34" ybr="1032.85" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1821.32" ytl="984.26" xbr="1838.21" ybr="1035.99" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1771.72" ytl="1115.72" xbr="1786.67" ybr="1157.06" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1795.72" ytl="970.76" xbr="1813.58" ybr="1010.96" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1744.42" ytl="966.71" xbr="1758.53" ybr="992.89" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1851.28" ytl="984.82" xbr="1874.78" ybr="1033.49" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1871.61" ytl="947.84" xbr="1915.10" ybr="993.72" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1845.13" ytl="1096.66" xbr="1860.45" ybr="1123.20" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1826.89" ytl="1098.65" xbr="1843.91" ybr="1124.21" z_order="0">
+    </box>
+  </image>
+  <image id="12" name="DJI_0596_f000360.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1948.48" ytl="1260.60" xbr="1966.31" ybr="1296.34" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1890.02" ytl="1125.87" xbr="1910.60" ybr="1167.11" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1821.35" ytl="1093.62" xbr="1854.47" ybr="1134.61" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1717.91" ytl="1239.66" xbr="1747.51" ybr="1270.53" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1922.39" ytl="1295.61" xbr="1952.26" ybr="1322.49" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1813.23" ytl="1116.96" xbr="1832.61" ybr="1165.16" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1857.46" ytl="1259.36" xbr="1873.56" ybr="1284.58" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1751.12" ytl="1092.94" xbr="1768.85" ybr="1126.64" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1774.71" ytl="1256.21" xbr="1801.38" ybr="1319.05" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1858.34" ytl="1296.31" xbr="1887.21" ybr="1323.82" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1849.10" ytl="1099.16" xbr="1875.89" ybr="1152.04" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1885.70" ytl="1238.50" xbr="1898.24" ybr="1264.13" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1911.93" ytl="1052.83" xbr="1946.72" ybr="1105.88" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1802.10" ytl="1256.53" xbr="1818.73" ybr="1307.43" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1864.77" ytl="1237.25" xbr="1882.62" ybr="1262.87" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1841.30" ytl="1257.13" xbr="1867.63" ybr="1286.86" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1826.00" ytl="1296.89" xbr="1849.81" ybr="1320.15" z_order="0">
+    </box>
+  </image>
+  <image id="13" name="DJI_0596_f000390.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1917.45" ytl="1468.89" xbr="1944.33" ybr="1524.86" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1957.98" ytl="1613.21" xbr="1981.67" ybr="1649.73" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1932.03" ytl="1666.37" xbr="1959.74" ybr="1711.34" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1770.99" ytl="1602.16" xbr="1799.26" ybr="1671.71" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1801.22" ytl="1602.95" xbr="1819.60" ybr="1659.61" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1809.21" ytl="1444.30" xbr="1830.78" ybr="1501.39" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1856.68" ytl="1668.39" xbr="1894.93" ybr="1775.23" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1896.89" ytl="1443.41" xbr="1921.77" ybr="1506.05" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1826.79" ytl="1425.13" xbr="1855.82" ybr="1486.77" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1919.37" ytl="1395.81" xbr="1941.22" ybr="1453.27" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1862.81" ytl="1431.14" xbr="1881.35" ybr="1492.86" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1742.88" ytl="1417.30" xbr="1767.09" ybr="1471.65" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1826.53" ytl="1650.90" xbr="1852.60" ybr="1739.42" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1904.01" ytl="1603.23" xbr="1941.66" ybr="1667.43" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1977.85" ytl="1588.57" xbr="2001.44" ybr="1627.30" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1841.90" ytl="1603.02" xbr="1867.40" ybr="1637.29" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1906.97" ytl="1698.44" xbr="1931.87" ybr="1743.38" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="3745.04" ytl="768.30" xbr="3756.45" ybr="796.23" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1889.09" ytl="1577.04" xbr="1907.64" ybr="1610.72" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1864.02" ytl="1634.76" xbr="1896.30" ybr="1687.80" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="3781.83" ytl="749.65" xbr="3806.93" ybr="777.39" z_order="0">
+    </box>
+  </image>
+  <image id="14" name="DJI_0596_f000420.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1940.27" ytl="1970.40" xbr="1972.56" ybr="2019.08" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1786.54" ytl="1937.46" xbr="1808.51" ybr="2003.46" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1798.25" ytl="1757.17" xbr="1821.31" ybr="1822.25" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1722.47" ytl="1991.18" xbr="1750.00" ybr="2028.09" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1759.73" ytl="1935.31" xbr="1789.65" ybr="2013.49" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1915.70" ytl="1662.70" xbr="1940.98" ybr="1710.63" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1811.18" ytl="1991.00" xbr="1853.19" ybr="2036.27" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1817.10" ytl="1734.10" xbr="1852.24" ybr="1810.00" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1831.93" ytl="1939.32" xbr="1861.09" ybr="1978.58" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1899.73" ytl="1933.33" xbr="1931.39" ybr="2006.71" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1917.73" ytl="1701.17" xbr="1940.90" ybr="1765.64" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1893.89" ytl="1764.93" xbr="1917.69" ybr="1821.62" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1848.81" ytl="2026.54" xbr="1881.39" ybr="2140.85" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1981.28" ytl="1921.14" xbr="2007.85" ybr="1961.26" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1854.18" ytl="1732.10" xbr="1884.50" ybr="1824.78" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1855.38" ytl="1979.46" xbr="1894.28" ybr="2025.23" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1755.59" ytl="1727.24" xbr="1771.62" ybr="1764.82" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1933.31" ytl="2014.90" xbr="1962.21" ybr="2066.54" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1688.64" ytl="1913.89" xbr="1719.72" ybr="1954.71" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="3801.97" ytl="928.99" xbr="3818.23" ybr="954.72" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="3731.52" ytl="1002.00" xbr="3741.89" ybr="1027.66" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1723.37" ytl="1720.97" xbr="1745.79" ybr="1760.41" z_order="0">
+    </box>
+  </image>
+  <image id="15" name="DJI_0596_f000450.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1847.91" ytl="1825.28" xbr="1883.53" ybr="1894.12" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1678.21" ytl="1988.04" xbr="1704.55" ybr="2026.91" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="830.94" ytl="78.17" xbr="919.70" ybr="134.22" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1838.20" ytl="1981.30" xbr="1895.20" ybr="2011.74" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1640.35" ytl="1940.40" xbr="1674.96" ybr="2011.86" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1805.71" ytl="2062.70" xbr="1843.40" ybr="2135.58" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1849.03" ytl="2065.51" xbr="1877.12" ybr="2139.98" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1799.04" ytl="1790.08" xbr="1833.96" ybr="1853.80" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1834.28" ytl="2008.91" xbr="1870.88" ybr="2058.93" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1733.41" ytl="2000.11" xbr="1766.85" ybr="2083.06" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1606.38" ytl="1835.31" xbr="1629.43" ybr="1882.23" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1771.48" ytl="2019.97" xbr="1795.83" ybr="2080.31" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1787.78" ytl="1821.66" xbr="1811.54" ybr="1890.76" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1710.12" ytl="2071.49" xbr="1738.48" ybr="2108.91" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1920.40" ytl="2003.97" xbr="1946.58" ybr="2058.77" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1914.48" ytl="1761.87" xbr="1936.90" ybr="1825.16" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1881.96" ytl="1982.45" xbr="1901.78" ybr="2020.62" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1889.91" ytl="1830.21" xbr="1914.71" ybr="1887.27" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1933.03" ytl="2049.91" xbr="1972.91" ybr="2108.33" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1982.81" ytl="1992.87" xbr="2012.17" ybr="2034.91" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1707.21" ytl="1779.74" xbr="1735.41" ybr="1827.23" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1738.03" ytl="1817.29" xbr="1766.32" ybr="1866.27" z_order="0">
+    </box>
+  </image>
+  <image id="16" name="DJI_0596_f000480.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1776.60" ytl="1827.81" xbr="1801.44" ybr="1896.33" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1806.23" ytl="2011.60" xbr="1852.14" ybr="2064.11" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1728.72" ytl="1792.92" xbr="1748.26" ybr="1833.87" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1878.61" ytl="1823.90" xbr="1910.31" ybr="1897.53" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1883.81" ytl="2031.65" xbr="1921.05" ybr="2090.92" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1659.49" ytl="1993.30" xbr="1694.08" ybr="2041.99" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="828.56" ytl="76.78" xbr="917.32" ybr="131.85" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1838.60" ytl="1819.41" xbr="1860.64" ybr="1899.44" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1927.42" ytl="2101.96" xbr="1967.04" ybr="2146.15" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1866.00" ytl="1985.70" xbr="1899.74" ybr="2036.92" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1846.24" ytl="2071.24" xbr="1883.59" ybr="2141.90" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1897.69" ytl="1751.80" xbr="1931.62" ybr="1826.56" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1799.22" ytl="1812.82" xbr="1829.96" ybr="1871.85" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1930.85" ytl="1997.07" xbr="1956.52" ybr="2062.34" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1699.88" ytl="2081.20" xbr="1728.79" ybr="2127.89" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1697.38" ytl="1786.50" xbr="1725.90" ybr="1848.33" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1799.20" ytl="2074.34" xbr="1845.81" ybr="2131.35" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1742.20" ytl="1988.87" xbr="1766.48" ybr="2060.84" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1594.60" ytl="1841.67" xbr="1617.32" ybr="1892.46" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1727.04" ytl="1840.36" xbr="1760.97" ybr="1891.41" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1973.80" ytl="1996.89" xbr="2013.05" ybr="2057.99" z_order="0">
+    </box>
+  </image>
+  <image id="17" name="DJI_0596_f000510.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1789.89" ytl="1776.34" xbr="1822.42" ybr="1848.01" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1796.81" ytl="2082.81" xbr="1837.24" ybr="2157.14" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1810.82" ytl="1989.34" xbr="1839.57" ybr="2033.42" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1918.38" ytl="2074.23" xbr="1949.78" ybr="2123.48" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1895.28" ytl="1739.12" xbr="1918.48" ybr="1801.68" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1787.64" ytl="1770.84" xbr="1812.24" ybr="1807.78" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1864.30" ytl="1962.48" xbr="1885.68" ybr="1997.62" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1917.75" ytl="2027.39" xbr="1957.22" ybr="2087.00" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1870.56" ytl="1795.41" xbr="1902.03" ybr="1864.86" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1725.40" ytl="1767.41" xbr="1744.37" ybr="1804.15" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1882.54" ytl="1992.30" xbr="1911.44" ybr="2060.50" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1769.86" ytl="1801.32" xbr="1795.71" ybr="1870.81" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1749.54" ytl="2003.15" xbr="1779.41" ybr="2058.22" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1838.48" ytl="1797.08" xbr="1861.69" ybr="1864.14" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1780.33" ytl="1955.57" xbr="1806.09" ybr="1998.43" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1696.65" ytl="2047.67" xbr="1725.30" ybr="2085.56" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1964.76" ytl="1961.89" xbr="2001.10" ybr="2025.80" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1720.91" ytl="1819.02" xbr="1764.44" ybr="1865.97" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1666.29" ytl="1969.84" xbr="1709.21" ybr="2033.83" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1922.01" ytl="1976.08" xbr="1965.13" ybr="2014.19" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1836.37" ytl="2036.32" xbr="1875.05" ybr="2114.31" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1794.42" ytl="2042.18" xbr="1826.64" ybr="2083.11" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1840.60" ytl="1963.58" xbr="1861.04" ybr="1995.17" z_order="0">
+    </box>
+  </image>
+  <image id="18" name="DJI_0596_f000540.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1839.33" ytl="1908.09" xbr="1860.50" ybr="1943.72" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1861.77" ytl="1910.52" xbr="1883.00" ybr="1945.03" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1840.27" ytl="1972.32" xbr="1877.43" ybr="2023.53" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1798.59" ytl="2028.78" xbr="1848.30" ybr="2151.53" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1802.17" ytl="1898.95" xbr="1824.93" ybr="1947.15" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1693.51" ytl="1720.20" xbr="1732.00" ybr="1767.00" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1699.28" ytl="1993.71" xbr="1727.81" ybr="2029.51" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1809.27" ytl="1937.04" xbr="1840.27" ybr="1978.35" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1789.84" ytl="1741.37" xbr="1820.50" ybr="1801.65" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1769.50" ytl="1756.29" xbr="1793.36" ybr="1819.49" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1890.90" ytl="1695.40" xbr="1913.65" ybr="1760.18" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1870.01" ytl="1745.40" xbr="1893.41" ybr="1816.70" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1831.97" ytl="1748.30" xbr="1855.08" ybr="1822.73" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1915.30" ytl="2011.79" xbr="1944.71" ybr="2060.65" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1937.72" ytl="1940.05" xbr="1962.78" ybr="1975.76" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1961.56" ytl="1916.33" xbr="1986.14" ybr="1954.00" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1794.70" ytl="1986.95" xbr="1826.21" ybr="2024.81" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1658.10" ytl="1898.56" xbr="1684.63" ybr="1931.68" z_order="0">
+    </box>
+  </image>
+  <image id="19" name="DJI_0596_f000570.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1787.16" ytl="1677.16" xbr="1821.38" ybr="1743.24" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1870.98" ytl="1691.49" xbr="1893.70" ybr="1772.60" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1644.69" ytl="1814.97" xbr="1681.65" ybr="1859.90" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1676.16" ytl="1853.41" xbr="1708.90" ybr="1898.37" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1834.95" ytl="1702.91" xbr="1856.33" ybr="1737.38" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1798.92" ytl="1920.20" xbr="1831.51" ybr="1956.64" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1840.79" ytl="1914.23" xbr="1872.06" ybr="1965.08" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1843.30" ytl="1849.03" xbr="1859.17" ybr="1880.50" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1863.90" ytl="1849.54" xbr="1883.00" ybr="1881.47" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1916.87" ytl="1679.76" xbr="1936.76" ybr="1722.68" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1772.74" ytl="1701.71" xbr="1794.74" ybr="1761.45" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1756.94" ytl="1890.44" xbr="1785.33" ybr="1937.84" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1914.70" ytl="1946.45" xbr="1940.44" ybr="1994.69" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1804.44" ytl="1841.44" xbr="1827.13" ybr="1893.79" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1707.75" ytl="1927.72" xbr="1733.46" ybr="1962.12" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1888.06" ytl="1648.17" xbr="1910.32" ybr="1706.43" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1880.06" ytl="1878.57" xbr="1906.25" ybr="1939.42" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1939.89" ytl="1876.80" xbr="1964.54" ybr="1929.91" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1957.55" ytl="1856.18" xbr="1980.30" ybr="1897.70" z_order="0">
+    </box>
+  </image>
+  <image id="20" name="DJI_0596_f000600.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1845.35" ytl="1836.49" xbr="1874.39" ybr="1878.74" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1671.48" ytl="1786.13" xbr="1707.63" ybr="1828.05" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1792.76" ytl="1621.75" xbr="1821.55" ybr="1681.89" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1737.06" ytl="1619.83" xbr="1752.64" ybr="1650.77" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1881.02" ytl="1812.53" xbr="1908.63" ybr="1872.94" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1914.71" ytl="1873.30" xbr="1943.86" ybr="1912.21" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1954.94" ytl="1791.32" xbr="1978.89" ybr="1831.32" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1803.38" ytl="1853.51" xbr="1832.17" ybr="1886.83" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1916.35" ytl="1837.69" xbr="1949.41" ybr="1881.78" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1887.77" ytl="1596.30" xbr="1909.56" ybr="1648.16" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1829.33" ytl="1625.77" xbr="1850.30" ybr="1672.76" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1759.06" ytl="1824.76" xbr="1789.95" ybr="1870.64" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1776.50" ytl="1644.96" xbr="1800.01" ybr="1701.15" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1715.06" ytl="1859.09" xbr="1741.49" ybr="1893.34" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1854.80" ytl="1781.50" xbr="1882.84" ybr="1817.12" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1812.80" ytl="1778.60" xbr="1845.74" ybr="1846.24" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1659.90" ytl="1772.50" xbr="1698.05" ybr="1802.16" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1864.01" ytl="1691.40" xbr="1883.18" ybr="1733.53" z_order="0">
+    </box>
+  </image>
+  <image id="21" name="DJI_0596_f000630.jpg" width="3840" height="2160">
+    <box label="person" source="manual" occluded="0" xtl="1954.86" ytl="1740.50" xbr="2003.32" ybr="1781.72" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1870.86" ytl="1600.68" xbr="1894.67" ybr="1647.28" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1689.70" ytl="1727.12" xbr="1717.43" ybr="1767.14" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1812.75" ytl="1608.31" xbr="1850.35" ybr="1653.46" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1821.63" ytl="1721.70" xbr="1841.20" ybr="1783.13" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1796.81" ytl="1572.90" xbr="1815.95" ybr="1602.68" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1727.01" ytl="1795.79" xbr="1749.70" ybr="1826.02" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1917.92" ytl="1777.07" xbr="1949.47" ybr="1819.53" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1782.77" ytl="1594.49" xbr="1803.44" ybr="1647.38" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1839.04" ytl="1725.75" xbr="1849.71" ybr="1754.94" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1714.94" ytl="1569.49" xbr="1739.03" ybr="1617.66" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1806.28" ytl="1788.00" xbr="1841.64" ybr="1838.58" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1850.14" ytl="1776.33" xbr="1879.27" ybr="1811.78" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1768.94" ytl="1776.54" xbr="1794.36" ybr="1810.99" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1888.89" ytl="1547.35" xbr="1909.43" ybr="1599.35" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1852.25" ytl="1726.79" xbr="1863.19" ybr="1755.03" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1667.36" ytl="1710.58" xbr="1695.87" ybr="1740.79" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1867.33" ytl="1724.23" xbr="1885.70" ybr="1756.90" z_order="0">
+    </box>
+  </image>
+  <image id="22" name="DJI_0596_f000660.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1866.21" ytl="1669.47" xbr="1886.99" ybr="1701.24" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1887.15" ytl="1697.76" xbr="1909.25" ybr="1723.36" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1941.01" ytl="1698.84" xbr="1960.32" ybr="1732.86" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1886.15" ytl="1698.21" xbr="1910.49" ybr="1744.35" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1848.64" ytl="1670.53" xbr="1864.05" ybr="1699.78" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1863.59" ytl="1545.47" xbr="1907.35" ybr="1609.97" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1955.88" ytl="1677.77" xbr="1977.65" ybr="1704.65" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1829.03" ytl="1531.65" xbr="1856.68" ybr="1593.84" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1785.30" ytl="1543.16" xbr="1819.82" ybr="1616.88" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1743.80" ytl="1529.34" xbr="1776.10" ybr="1612.27" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1917.31" ytl="1749.05" xbr="1942.54" ybr="1784.47" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1690.00" ytl="1658.84" xbr="1724.98" ybr="1712.92" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1814.99" ytl="1730.77" xbr="1841.82" ybr="1766.20" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1888.93" ytl="1497.09" xbr="1941.91" ybr="1543.16" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1823.42" ytl="1670.59" xbr="1848.98" ybr="1702.43" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1773.02" ytl="1711.37" xbr="1796.88" ybr="1749.46" z_order="0">
+    </box>
+  </image>
+  <image id="23" name="DJI_0596_f000690.jpg" width="3840" height="2160">
+    <box label="person" source="manual" occluded="0" xtl="1820.78" ytl="1677.78" xbr="1844.90" ybr="1704.81" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1943.42" ytl="1628.23" xbr="1978.77" ybr="1686.93" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1921.83" ytl="1664.09" xbr="1945.68" ybr="1700.95" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1811.41" ytl="1496.42" xbr="1836.17" ybr="1542.48" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1780.89" ytl="1654.60" xbr="1807.86" ybr="1695.27" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1733.70" ytl="1485.36" xbr="1769.62" ybr="1537.80" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1876.43" ytl="1505.05" xbr="1895.39" ybr="1549.10" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1791.29" ytl="1503.15" xbr="1811.31" ybr="1549.37" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1954.73" ytl="1627.65" xbr="1977.83" ybr="1657.08" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1890.77" ytl="1462.36" xbr="1907.78" ybr="1510.33" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1698.22" ytl="1619.65" xbr="1735.39" ybr="1662.62" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1822.83" ytl="1702.53" xbr="1855.87" ybr="1750.30" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1745.08" ytl="1682.79" xbr="1765.27" ybr="1709.31" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1865.17" ytl="1613.00" xbr="1886.62" ybr="1649.80" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1835.10" ytl="1613.60" xbr="1858.20" ybr="1652.31" z_order="0">
+    </box>
+  </image>
+  <image id="24" name="DJI_0596_f000720.jpg" width="3840" height="2160">
+    <box label="person" source="manual" occluded="0" xtl="1826.73" ytl="1623.56" xbr="1856.68" ybr="1674.24" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1943.78" ytl="1570.40" xbr="1971.78" ybr="1611.81" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1911.23" ytl="1635.92" xbr="1950.43" ybr="1686.23" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1744.16" ytl="1462.23" xbr="1776.74" ybr="1501.94" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1818.66" ytl="1569.83" xbr="1836.29" ybr="1606.05" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1890.32" ytl="1426.08" xbr="1907.96" ybr="1469.10" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1796.83" ytl="1463.98" xbr="1815.74" ybr="1508.66" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1795.30" ytl="1598.22" xbr="1814.75" ybr="1646.68" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1876.67" ytl="1466.03" xbr="1895.42" ybr="1510.04" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1831.33" ytl="1469.53" xbr="1844.79" ybr="1510.39" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1751.17" ytl="1636.06" xbr="1771.91" ybr="1660.17" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1707.98" ytl="1580.70" xbr="1736.90" ybr="1612.89" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1874.06" ytl="1576.75" xbr="1888.46" ybr="1604.99" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1891.21" ytl="1598.92" xbr="1911.45" ybr="1630.97" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1698.09" ytl="1571.09" xbr="1720.35" ybr="1594.81" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1981.76" ytl="1530.92" xbr="1999.74" ybr="1567.61" z_order="0">
+    </box>
+  </image>
+  <image id="25" name="DJI_0596_f000750.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1904.20" ytl="1618.84" xbr="1928.89" ybr="1683.60" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1815.74" ytl="1435.35" xbr="1840.33" ybr="1485.94" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1890.22" ytl="1573.06" xbr="1911.81" ybr="1611.62" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1879.87" ytl="1445.53" xbr="1895.74" ybr="1485.20" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1891.01" ytl="1406.23" xbr="1909.52" ybr="1450.94" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1801.29" ytl="1444.36" xbr="1819.29" ybr="1487.12" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1714.71" ytl="1558.27" xbr="1746.80" ybr="1590.77" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1784.20" ytl="1543.79" xbr="1816.86" ybr="1609.80" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1747.70" ytl="1415.76" xbr="1785.16" ybr="1488.52" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1945.30" ytl="1544.45" xbr="1985.10" ybr="1608.06" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1705.66" ytl="1546.46" xbr="1729.57" ybr="1571.22" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1825.62" ytl="1579.22" xbr="1872.74" ybr="1644.81" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1923.30" ytl="1589.27" xbr="1943.86" ybr="1618.94" z_order="0">
+    </box>
+  </image>
+  <image id="26" name="DJI_0596_f000780.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1925.17" ytl="1582.39" xbr="1942.98" ybr="1608.77" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1805.60" ytl="1441.67" xbr="1823.33" ybr="1482.89" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1803.98" ytl="1563.68" xbr="1822.97" ybr="1613.35" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1775.16" ytl="1537.06" xbr="1793.45" ybr="1589.74" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1893.71" ytl="1405.70" xbr="1910.88" ybr="1445.05" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1859.43" ytl="1542.58" xbr="1889.70" ybr="1581.55" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1949.59" ytl="1552.22" xbr="1971.59" ybr="1588.19" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1825.91" ytl="1573.97" xbr="1859.72" ybr="1640.80" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1766.40" ytl="1598.99" xbr="1783.50" ybr="1622.39" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1893.58" ytl="1564.64" xbr="1912.16" ybr="1592.05" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1836.45" ytl="1441.76" xbr="1852.34" ybr="1485.80" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1721.92" ytl="1547.34" xbr="1751.90" ybr="1580.96" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1818.16" ytl="1431.43" xbr="1840.25" ybr="1476.28" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1880.62" ytl="1439.37" xbr="1898.88" ybr="1485.92" z_order="0">
+    </box>
+  </image>
+  <image id="27" name="DJI_0596_f000810.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1953.60" ytl="1553.79" xbr="1973.24" ybr="1578.35" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1835.58" ytl="1590.74" xbr="1858.50" ybr="1618.73" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1894.60" ytl="1562.91" xbr="1910.68" ybr="1586.95" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1927.49" ytl="1575.72" xbr="1944.61" ybr="1607.09" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1726.25" ytl="1533.96" xbr="1749.04" ybr="1568.41" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1843.78" ytl="1544.29" xbr="1890.79" ybr="1586.08" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1776.92" ytl="1444.51" xbr="1814.33" ybr="1491.38" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1763.51" ytl="1524.29" xbr="1783.69" ybr="1582.36" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1855.79" ytl="1446.60" xbr="1871.55" ybr="1483.20" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1808.59" ytl="1561.73" xbr="1827.36" ybr="1606.63" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1883.27" ytl="1439.74" xbr="1901.51" ybr="1485.47" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1893.86" ytl="1407.31" xbr="1910.78" ybr="1442.32" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1823.96" ytl="1431.57" xbr="1838.65" ybr="1455.61" z_order="0">
+    </box>
+  </image>
+  <image id="28" name="DJI_0596_f000840.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1861.42" ytl="1551.42" xbr="1879.49" ybr="1587.50" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1757.23" ytl="1435.71" xbr="1771.34" ybr="1459.14" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1860.54" ytl="1453.88" xbr="1877.57" ybr="1491.20" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1812.95" ytl="1566.50" xbr="1830.05" ybr="1612.69" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1753.63" ytl="1522.76" xbr="1771.98" ybr="1573.46" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1814.55" ytl="1450.70" xbr="1831.00" ybr="1490.02" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1944.97" ytl="1561.07" xbr="1970.45" ybr="1599.90" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1921.77" ytl="1588.22" xbr="1943.84" ybr="1635.30" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1875.19" ytl="1445.91" xbr="1890.52" ybr="1490.16" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1779.16" ytl="1438.51" xbr="1796.21" ybr="1476.00" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1895.14" ytl="1566.86" xbr="1913.36" ybr="1597.16" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1896.55" ytl="1416.41" xbr="1912.36" ybr="1456.06" z_order="0">
+    </box>
+  </image>
+  <image id="29" name="DJI_0596_f000870.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1862.72" ytl="1459.18" xbr="1879.15" ybr="1494.87" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1780.83" ytl="1600.72" xbr="1796.79" ybr="1621.36" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1746.02" ytl="1513.37" xbr="1764.24" ybr="1561.58" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1946.41" ytl="1561.25" xbr="1969.38" ybr="1595.75" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1896.05" ytl="1568.73" xbr="1912.73" ybr="1594.72" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1851.32" ytl="1560.67" xbr="1874.83" ybr="1595.82" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1817.15" ytl="1568.63" xbr="1833.34" ybr="1613.70" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1816.85" ytl="1457.00" xbr="1833.39" ybr="1493.98" z_order="0">
+    </box>
+  </image>
+  <image id="30" name="DJI_0596_f000900.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1819.05" ytl="1490.54" xbr="1835.95" ybr="1528.63" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1818.69" ytl="1600.33" xbr="1836.23" ybr="1642.92" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1843.88" ytl="1627.05" xbr="1866.23" ybr="1663.90" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1868.87" ytl="1582.75" xbr="1908.35" ybr="1621.63" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1916.00" ytl="1616.37" xbr="1940.68" ybr="1655.20" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1779.91" ytl="1491.98" xbr="1810.75" ybr="1520.56" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1875.86" ytl="1500.39" xbr="1915.26" ybr="1533.72" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1895.61" ytl="1450.71" xbr="1931.23" ybr="1495.56" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1746.08" ytl="1537.29" xbr="1764.30" ybr="1587.71" z_order="0">
+    </box>
+  </image>
+  <image id="31" name="DJI_0596_f000930.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1746.12" ytl="1607.91" xbr="1764.10" ybr="1655.53" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1814.10" ytl="1567.50" xbr="1840.90" ybr="1625.95" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1752.16" ytl="1667.92" xbr="1771.27" ybr="1692.11" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1858.98" ytl="1573.11" xbr="1888.93" ybr="1612.27" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1900.44" ytl="1545.47" xbr="1930.39" ybr="1586.93" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1852.07" ytl="1660.64" xbr="1875.10" ybr="1715.93" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1882.01" ytl="1653.73" xbr="1911.96" ybr="1709.02" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1974.48" ytl="1629.55" xbr="1989.83" ybr="1661.98" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1940.01" ytl="1683.91" xbr="1956.77" ybr="1719.15" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1822.11" ytl="1685.31" xbr="1837.77" ybr="1724.66" z_order="0">
+    </box>
+  </image>
+  <image id="32" name="DJI_0596_f000960.jpg" width="3840" height="2160">
+    <box label="person" source="manual" occluded="0" xtl="1877.80" ytl="1661.80" xbr="1908.70" ybr="1721.85" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1859.70" ytl="1750.27" xbr="1888.91" ybr="1795.57" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1941.69" ytl="1776.46" xbr="1960.35" ybr="1805.41" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1898.14" ytl="1630.70" xbr="1939.60" ybr="1695.20" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1825.63" ytl="1776.41" xbr="1841.52" ybr="1818.82" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1824.77" ytl="1669.45" xbr="1841.12" ybr="1703.81" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1865.13" ytl="1799.82" xbr="1880.69" ybr="1838.94" z_order="0">
+    </box>
+  </image>
+  <image id="33" name="DJI_0596_f000990.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1740.87" ytl="1863.13" xbr="1766.73" ybr="1889.37" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1887.30" ytl="1737.18" xbr="1939.56" ybr="1793.52" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1849.70" ytl="1777.60" xbr="1886.70" ybr="1821.43" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1852.86" ytl="1868.77" xbr="1889.65" ybr="1903.64" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1837.37" ytl="1902.49" xbr="1868.11" ybr="1945.60" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1818.46" ytl="1886.08" xbr="1835.13" ybr="1926.06" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1820.06" ytl="1779.75" xbr="1837.28" ybr="1815.42" z_order="0">
+    </box>
+  </image>
+  <image id="34" name="DJI_0596_f001020.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="1518.38" ytl="1903.96" xbr="1532.83" ybr="1937.17" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1515.25" ytl="2010.01" xbr="1532.43" ybr="2052.74" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1588.27" ytl="1866.28" xbr="1604.19" ybr="1901.90" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1440.72" ytl="1987.93" xbr="1471.07" ybr="2021.80" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1558.01" ytl="1906.05" xbr="1571.66" ybr="1939.35" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1577.98" ytl="1896.96" xbr="1593.78" ybr="1937.61" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="1617.11" ytl="2013.09" xbr="1649.36" ybr="2052.25" z_order="0">
+    </box>
+  </image>
+  <image id="35" name="DJI_0596_f001050.jpg" width="3840" height="2160">
+    <box label="person" source="file" occluded="0" xtl="985.37" ytl="2049.59" xbr="1001.78" ybr="2085.29" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1028.04" ytl="2048.37" xbr="1043.74" ybr="2083.87" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="995.62" ytl="2033.66" xbr="1016.88" ybr="2064.23" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1050.70" ytl="2040.01" xbr="1068.27" ybr="2081.41" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1062.32" ytl="2008.58" xbr="1076.93" ybr="2041.68" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="1086.72" ytl="2006.20" xbr="1099.60" ybr="2037.66" z_order="0">
+    </box>
+  </image>
+  <image id="36" name="Stockflue_Flyaround_f000000.jpg" width="1280" height="720">
+    <box label="person" source="manual" occluded="0" xtl="478.50" ytl="380.62" xbr="494.33" ybr="430.86" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="553.57" ytl="293.99" xbr="577.42" ybr="332.45" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="452.29" ytl="383.03" xbr="476.86" ybr="436.80" z_order="0">
+    </box>
+  </image>
+  <image id="37" name="Stockflue_Flyaround_f000030.jpg" width="1280" height="720">
+    <box label="person" source="manual" occluded="0" xtl="474.40" ytl="373.20" xbr="488.49" ybr="430.23" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="621.81" ytl="309.20" xbr="641.28" ybr="342.02" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="450.73" ytl="371.80" xbr="475.74" ybr="434.15" z_order="0">
+    </box>
+  </image>
+  <image id="38" name="Stockflue_Flyaround_f000060.jpg" width="1280" height="720">
+    <box label="person" source="file" occluded="0" xtl="700.64" ytl="364.74" xbr="737.55" ybr="407.57" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="477.65" ytl="365.41" xbr="493.50" ybr="433.60" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="454.43" ytl="378.85" xbr="477.36" ybr="430.49" z_order="0">
+    </box>
+  </image>
+  <image id="39" name="Stockflue_Flyaround_f000090.jpg" width="1280" height="720">
+    <box label="person" source="manual" occluded="0" xtl="453.82" ytl="364.88" xbr="470.65" ybr="425.00" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="470.10" ytl="362.60" xbr="496.04" ybr="430.47" z_order="0">
+    </box>
+  </image>
+  <image id="40" name="Stockflue_Flyaround_f000120.jpg" width="1280" height="720">
+    <box label="person" source="manual" occluded="0" xtl="492.13" ytl="347.17" xbr="516.11" ybr="400.20" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="469.70" ytl="351.41" xbr="493.11" ybr="406.54" z_order="0">
+    </box>
+  </image>
+  <image id="41" name="Stockflue_Flyaround_f000150.jpg" width="1280" height="720">
+    <box label="person" source="manual" occluded="0" xtl="507.89" ytl="342.59" xbr="530.70" ybr="396.31" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="487.59" ytl="345.28" xbr="509.75" ybr="400.18" z_order="0">
+    </box>
+  </image>
+  <image id="42" name="Stockflue_Flyaround_f000180.jpg" width="1280" height="720">
+    <box label="person" source="file" occluded="0" xtl="527.89" ytl="344.41" xbr="547.56" ybr="394.34" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="509.92" ytl="341.84" xbr="526.99" ybr="394.57" z_order="0">
+    </box>
+  </image>
+  <image id="43" name="Stockflue_Flyaround_f000210.jpg" width="1280" height="720">
+    <box label="person" source="file" occluded="0" xtl="522.68" ytl="341.81" xbr="543.33" ybr="398.98" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="543.58" ytl="352.13" xbr="561.73" ybr="402.75" z_order="0">
+    </box>
+  </image>
+  <image id="44" name="Stockflue_Flyaround_f000240.jpg" width="1280" height="720">
+    <box label="person" source="manual" occluded="0" xtl="569.52" ytl="354.82" xbr="587.85" ybr="401.88" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="547.07" ytl="351.16" xbr="569.10" ybr="402.89" z_order="0">
+    </box>
+  </image>
+  <image id="45" name="Stockflue_Flyaround_f000270.jpg" width="1280" height="720">
+    <box label="person" source="file" occluded="0" xtl="550.60" ytl="349.38" xbr="574.67" ybr="401.95" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="577.45" ytl="365.90" xbr="596.48" ybr="408.79" z_order="0">
+    </box>
+  </image>
+  <image id="46" name="Stockflue_Flyaround_f000300.jpg" width="1280" height="720">
+    <box label="person" source="file" occluded="0" xtl="602.19" ytl="371.61" xbr="628.63" ybr="417.53" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="580.71" ytl="354.48" xbr="603.17" ybr="406.86" z_order="0">
+    </box>
+  </image>
+  <image id="47" name="Stockflue_Flyaround_f000330.jpg" width="1280" height="720">
+    <box label="person" source="manual" occluded="0" xtl="595.26" ytl="388.47" xbr="613.53" ybr="422.46" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="584.35" ytl="354.61" xbr="606.62" ybr="413.74" z_order="0">
+    </box>
+  </image>
+  <image id="48" name="Stockflue_Flyaround_f000360.jpg" width="1280" height="720">
+    <box label="person" source="file" occluded="0" xtl="614.75" ytl="368.23" xbr="636.38" ybr="424.98" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="580.74" ytl="410.46" xbr="598.41" ybr="452.60" z_order="0">
+    </box>
+  </image>
+  <image id="49" name="Stockflue_Flyaround_f000390.jpg" width="1280" height="720">
+    <box label="person" source="manual" occluded="0" xtl="613.80" ytl="381.00" xbr="640.54" ybr="428.42" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="555.57" ytl="423.13" xbr="579.97" ybr="464.73" z_order="0">
+    </box>
+  </image>
+  <image id="50" name="Stockflue_Flyaround_f000420.jpg" width="1280" height="720">
+    <box label="person" source="file" occluded="0" xtl="624.19" ytl="394.57" xbr="645.82" ybr="439.20" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="549.80" ytl="406.06" xbr="577.44" ybr="458.27" z_order="0">
+    </box>
+  </image>
+  <image id="51" name="Stockflue_Flyaround_f000450.jpg" width="1280" height="720">
+    <box label="person" source="file" occluded="0" xtl="633.13" ytl="399.40" xbr="661.34" ybr="446.53" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="571.33" ytl="404.66" xbr="599.50" ybr="448.62" z_order="0">
+    </box>
+  </image>
+  <image id="52" name="Stockflue_Flyaround_f000480.jpg" width="1280" height="720">
+    <box label="person" source="manual" occluded="0" xtl="615.40" ytl="402.60" xbr="647.40" ybr="446.10" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="400.76" ytl="707.24" xbr="421.16" ybr="719.18" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="554.57" ytl="394.00" xbr="581.20" ybr="441.91" z_order="0">
+    </box>
+  </image>
+  <image id="53" name="Stockflue_Flyaround_f000510.jpg" width="1280" height="720">
+    <box label="person" source="file" occluded="0" xtl="336.37" ytl="647.42" xbr="359.16" ybr="684.78" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="540.28" ytl="383.73" xbr="558.70" ybr="428.08" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="590.84" ytl="399.63" xbr="612.30" ybr="443.34" z_order="0">
+    </box>
+  </image>
+  <image id="54" name="Stockflue_Flyaround_f000540.jpg" width="1280" height="720">
+    <box label="person" source="manual" occluded="0" xtl="580.18" ytl="396.89" xbr="605.00" ybr="452.40" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="537.38" ytl="382.77" xbr="559.92" ybr="425.14" z_order="0">
+    </box>
+  </image>
+  <image id="55" name="Stockflue_Flyaround_f000570.jpg" width="1280" height="720">
+    <box label="person" source="manual" occluded="0" xtl="543.88" ytl="405.00" xbr="568.26" ybr="451.10" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="508.73" ytl="377.79" xbr="527.47" ybr="415.07" z_order="0">
+    </box>
+  </image>
+  <image id="56" name="Stockflue_Flyaround_f000600.jpg" width="1280" height="720">
+    <box label="person" source="manual" occluded="0" xtl="520.43" ytl="407.44" xbr="543.18" ybr="455.05" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="499.20" ytl="362.91" xbr="520.37" ybr="419.97" z_order="0">
+    </box>
+  </image>
+  <image id="57" name="Stockflue_Flyaround_f000630.jpg" width="1280" height="720">
+    <box label="person" source="file" occluded="0" xtl="479.39" ytl="365.37" xbr="511.44" ybr="404.56" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="500.81" ytl="404.36" xbr="519.60" ybr="451.90" z_order="0">
+    </box>
+  </image>
+  <image id="58" name="Stockflue_Flyaround_f000660.jpg" width="1280" height="720">
+    <box label="person" source="manual" occluded="0" xtl="463.18" ytl="380.66" xbr="482.99" ybr="434.21" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="476.78" ytl="399.20" xbr="499.40" ybr="449.24" z_order="0">
+    </box>
+  </image>
+  <image id="59" name="Stockflue_Flyaround_f000690.jpg" width="1280" height="720">
+    <box label="person" source="file" occluded="0" xtl="479.36" ytl="385.03" xbr="497.19" ybr="430.90" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="497.98" ytl="398.39" xbr="519.10" ybr="448.16" z_order="0">
+    </box>
+  </image>
+  <image id="60" name="Surenen_Pass_Trail_Running_f000000.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="182.07" ytl="477.56" xbr="225.48" ybr="611.55" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="198.76" ytl="533.87" xbr="254.12" ybr="689.05" z_order="0">
+    </box>
+  </image>
+  <image id="61" name="Surenen_Pass_Trail_Running_f000030.jpg" width="406" height="720">
+    <box label="person" source="manual" occluded="0" xtl="184.04" ytl="513.46" xbr="250.72" ybr="674.34" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="166.90" ytl="448.69" xbr="224.76" ybr="590.50" z_order="0">
+    </box>
+  </image>
+  <image id="62" name="Surenen_Pass_Trail_Running_f000060.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="175.31" ytl="429.80" xbr="226.69" ybr="587.26" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="176.14" ytl="352.13" xbr="215.84" ybr="452.67" z_order="0">
+    </box>
+  </image>
+  <image id="63" name="Surenen_Pass_Trail_Running_f000090.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="152.69" ytl="301.23" xbr="190.71" ybr="416.26" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="170.87" ytl="378.67" xbr="221.37" ybr="518.24" z_order="0">
+    </box>
+  </image>
+  <image id="64" name="Surenen_Pass_Trail_Running_f000120.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="125.08" ytl="301.90" xbr="157.56" ybr="427.41" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="148.29" ytl="400.10" xbr="216.35" ybr="554.04" z_order="0">
+    </box>
+  </image>
+  <image id="65" name="Surenen_Pass_Trail_Running_f000150.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="110.55" ytl="389.19" xbr="161.77" ybr="525.68" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="69.80" ytl="297.63" xbr="113.39" ybr="415.97" z_order="0">
+    </box>
+  </image>
+  <image id="66" name="Surenen_Pass_Trail_Running_f000180.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="65.69" ytl="261.18" xbr="97.08" ybr="353.49" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="78.64" ytl="345.99" xbr="123.27" ybr="452.56" z_order="0">
+    </box>
+  </image>
+  <image id="67" name="Surenen_Pass_Trail_Running_f000210.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="106.76" ytl="264.48" xbr="130.49" ybr="330.37" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="88.76" ytl="347.83" xbr="118.49" ybr="443.12" z_order="0">
+    </box>
+  </image>
+  <image id="68" name="Surenen_Pass_Trail_Running_f000240.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="119.08" ytl="350.02" xbr="144.51" ybr="427.31" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="124.67" ytl="271.28" xbr="145.06" ybr="339.92" z_order="0">
+    </box>
+  </image>
+  <image id="69" name="Surenen_Pass_Trail_Running_f000270.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="124.54" ytl="266.83" xbr="145.35" ybr="332.84" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="135.52" ytl="342.92" xbr="158.72" ybr="415.81" z_order="0">
+    </box>
+  </image>
+  <image id="70" name="Surenen_Pass_Trail_Running_f000300.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="124.78" ytl="392.00" xbr="150.53" ybr="465.09" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="121.65" ytl="304.73" xbr="144.05" ybr="368.51" z_order="0">
+    </box>
+  </image>
+  <image id="71" name="Surenen_Pass_Trail_Running_f000330.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="110.00" ytl="472.18" xbr="142.47" ybr="566.57" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="120.28" ytl="359.21" xbr="143.24" ybr="427.80" z_order="0">
+    </box>
+  </image>
+  <image id="72" name="Surenen_Pass_Trail_Running_f000360.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="114.99" ytl="338.69" xbr="139.58" ybr="424.37" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="107.26" ytl="465.42" xbr="142.72" ybr="567.67" z_order="0">
+    </box>
+  </image>
+  <image id="73" name="Surenen_Pass_Trail_Running_f000390.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="104.30" ytl="413.94" xbr="137.77" ybr="517.02" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="128.26" ytl="295.48" xbr="150.84" ybr="375.05" z_order="0">
+    </box>
+  </image>
+  <image id="74" name="Surenen_Pass_Trail_Running_f000420.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="130.66" ytl="378.66" xbr="160.24" ybr="472.89" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="150.18" ytl="277.10" xbr="172.81" ybr="342.85" z_order="0">
+    </box>
+  </image>
+  <image id="75" name="Surenen_Pass_Trail_Running_f000450.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="173.37" ytl="271.52" xbr="192.41" ybr="330.06" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="168.66" ytl="359.68" xbr="192.32" ybr="440.92" z_order="0">
+    </box>
+  </image>
+  <image id="76" name="Surenen_Pass_Trail_Running_f000480.jpg" width="406" height="720">
+    <box label="person" source="manual" occluded="0" xtl="184.97" ytl="252.90" xbr="205.83" ybr="311.00" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="200.19" ytl="331.75" xbr="220.98" ybr="408.70" z_order="0">
+    </box>
+  </image>
+  <image id="77" name="Surenen_Pass_Trail_Running_f000510.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="190.75" ytl="238.54" xbr="214.63" ybr="302.48" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="220.04" ytl="321.09" xbr="242.17" ybr="392.83" z_order="0">
+    </box>
+  </image>
+  <image id="78" name="Surenen_Pass_Trail_Running_f000540.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="195.93" ytl="252.42" xbr="213.60" ybr="305.33" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="247.85" ytl="337.91" xbr="269.86" ybr="412.80" z_order="0">
+    </box>
+  </image>
+  <image id="79" name="Surenen_Pass_Trail_Running_f000570.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="184.96" ytl="262.03" xbr="205.12" ybr="318.89" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="248.81" ytl="346.58" xbr="276.88" ybr="419.05" z_order="0">
+    </box>
+  </image>
+  <image id="80" name="Surenen_Pass_Trail_Running_f000600.jpg" width="406" height="720">
+    <box label="person" source="manual" occluded="0" xtl="168.64" ytl="257.01" xbr="190.23" ybr="319.20" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="241.79" ytl="350.38" xbr="265.95" ybr="432.87" z_order="0">
+    </box>
+  </image>
+  <image id="81" name="Surenen_Pass_Trail_Running_f000630.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="142.20" ytl="253.10" xbr="163.67" ybr="319.66" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="215.29" ytl="341.63" xbr="241.77" ybr="418.85" z_order="0">
+    </box>
+  </image>
+  <image id="82" name="Surenen_Pass_Trail_Running_f000660.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="194.44" ytl="331.88" xbr="219.24" ybr="411.30" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="122.48" ytl="258.74" xbr="138.93" ybr="318.20" z_order="0">
+    </box>
+  </image>
+  <image id="83" name="Surenen_Pass_Trail_Running_f000690.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="127.56" ytl="275.22" xbr="143.69" ybr="324.38" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="175.43" ytl="343.41" xbr="198.20" ybr="406.84" z_order="0">
+    </box>
+  </image>
+  <image id="84" name="Surenen_Pass_Trail_Running_f000720.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="144.60" ytl="290.61" xbr="158.74" ybr="339.03" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="174.37" ytl="350.84" xbr="192.27" ybr="413.84" z_order="0">
+    </box>
+  </image>
+  <image id="85" name="Surenen_Pass_Trail_Running_f000750.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="166.38" ytl="310.28" xbr="178.76" ybr="352.30" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="187.47" ytl="356.91" xbr="201.37" ybr="414.22" z_order="0">
+    </box>
+  </image>
+  <image id="86" name="Surenen_Pass_Trail_Running_f000780.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="186.40" ytl="334.96" xbr="197.98" ybr="377.66" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="204.83" ytl="374.44" xbr="218.08" ybr="413.29" z_order="0">
+    </box>
+  </image>
+  <image id="87" name="Surenen_Pass_Trail_Running_f000810.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="214.66" ytl="396.08" xbr="225.42" ybr="422.21" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="202.25" ytl="353.71" xbr="212.44" ybr="386.24" z_order="0">
+    </box>
+  </image>
+  <image id="88" name="Surenen_Pass_Trail_Running_f000840.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="208.30" ytl="381.65" xbr="216.40" ybr="410.69" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="216.54" ytl="418.73" xbr="227.01" ybr="452.33" z_order="0">
+    </box>
+  </image>
+  <image id="89" name="Surenen_Pass_Trail_Running_f000870.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="209.01" ytl="403.72" xbr="218.27" ybr="429.56" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="214.94" ytl="442.74" xbr="224.82" ybr="480.90" z_order="0">
+    </box>
+  </image>
+  <image id="90" name="Surenen_Pass_Trail_Running_f000900.jpg" width="406" height="720">
+    <box label="person" source="manual" occluded="0" xtl="207.70" ytl="422.03" xbr="215.80" ybr="451.30" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="210.79" ytl="462.27" xbr="220.88" ybr="492.99" z_order="0">
+    </box>
+  </image>
+  <image id="91" name="Surenen_Pass_Trail_Running_f000930.jpg" width="406" height="720">
+    <box label="person" source="manual" occluded="0" xtl="212.06" ytl="423.53" xbr="221.41" ybr="453.70" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="208.88" ytl="464.46" xbr="220.12" ybr="501.67" z_order="0">
+    </box>
+  </image>
+  <image id="92" name="Surenen_Pass_Trail_Running_f000960.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="214.25" ytl="407.59" xbr="224.62" ybr="436.33" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="210.66" ytl="448.24" xbr="222.15" ybr="485.12" z_order="0">
+    </box>
+  </image>
+  <image id="93" name="Surenen_Pass_Trail_Running_f000990.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="215.90" ytl="427.04" xbr="226.17" ybr="457.77" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="213.42" ytl="383.47" xbr="223.36" ybr="412.73" z_order="0">
+    </box>
+  </image>
+  <image id="94" name="Surenen_Pass_Trail_Running_f001020.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="215.82" ytl="410.23" xbr="228.48" ybr="444.35" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="204.96" ytl="368.34" xbr="213.95" ybr="395.34" z_order="0">
+    </box>
+  </image>
+  <image id="95" name="Surenen_Pass_Trail_Running_f001050.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="188.37" ytl="352.96" xbr="198.43" ybr="387.99" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="218.00" ytl="395.27" xbr="229.50" ybr="420.40" z_order="0">
+    </box>
+  </image>
+  <image id="96" name="Surenen_Pass_Trail_Running_f001080.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="169.77" ytl="335.61" xbr="184.49" ybr="381.06" z_order="0">
+    </box>
+    <box label="person" source="manual" occluded="0" xtl="212.47" ytl="374.54" xbr="224.20" ybr="402.70" z_order="0">
+    </box>
+  </image>
+  <image id="97" name="Surenen_Pass_Trail_Running_f001110.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="161.81" ytl="323.01" xbr="172.74" ybr="350.62" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="198.56" ytl="357.09" xbr="206.87" ybr="388.86" z_order="0">
+    </box>
+  </image>
+  <image id="98" name="Surenen_Pass_Trail_Running_f001140.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="156.39" ytl="307.75" xbr="165.85" ybr="336.43" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="179.23" ytl="340.07" xbr="191.23" ybr="381.52" z_order="0">
+    </box>
+  </image>
+  <image id="99" name="Surenen_Pass_Trail_Running_f001170.jpg" width="406" height="720">
+    <box label="person" source="file" occluded="0" xtl="151.71" ytl="295.24" xbr="160.24" ybr="329.35" z_order="0">
+    </box>
+    <box label="person" source="file" occluded="0" xtl="167.52" ytl="328.58" xbr="176.93" ybr="349.14" z_order="0">
+    </box>
+  </image>
+</annotations>
