@@ -1,16 +1,3 @@
-"""
-Tracking kazancını GT kareleri üzerinde ölçer.
-
-Tracking yoğun videoda çalışıyor ama GT sadece 30 karede bir örneklenmiş. Dosya
-adları `{slug}_f{kare:06d}.jpg` biçiminde olduğu için tracker çıktısındaki kareyi
-GT görseline geri eşleyebiliyoruz; böylece yeni sonuçlar eski tabloyla birebir
-karşılaştırılabilir kalıyor.
-
-Metrik çıkarma kodu evaluate_on_gt.py ile aynıdır. `raw` aşaması eski tablodaki
-değerleri yeniden üretmeli: üretmiyorsa kare hizalaması bozuktur ve geri kalan
-her sayı anlamsızdır, o yüzden bu bir kapı kontrolü olarak raporlanıyor.
-"""
-
 import argparse
 import contextlib
 import io
@@ -127,52 +114,6 @@ HEADER = (f"| {'Model / asama':<26} | {'mAP@50':<8} | {'mAP@50-95':<9} | {'AP_Sm
 SEPARATOR = "|" + "-" * 28 + "|" + ("-" * 10 + "|") * 3 + ("-" * 10 + "|") * 4
 
 
-def sweep(coco_gt, model, slugs, lines):
-    """max_gap ve alpha duyarlılığı + leave-one-video-out.
-
-    133 kutuluk bir sette en iyi parametreyi seçip onu raporlamak test setine
-    uydurmak olurdu. Ana tablo a priori varsayılanlarla üretiliyor; burada
-    sonucun parametreye ne kadar bağlı olduğu ve bir videoda seçilen ayarın
-    diğerinde ne verdiği gösteriliyor.
-
-    İlişkilendirme önbellekten geldiği için tarama videoyu yeniden decode etmiyor.
-    """
-    caches = {slug: json.load(open(cache_path(slug, model))) for slug in slugs}
-    by_video = {slug: [i["id"] for i in coco_gt.dataset["images"]
-                       if parse_name(i["file_name"])[0] == slug] for slug in slugs}
-
-    grid = {}
-    for max_gap in (5, 10, 15, 30):
-        for alpha in (0.3, 0.5, 0.7):
-            params = {**DEFAULTS, "max_gap": max_gap, "alpha": alpha}
-            frames_by_slug = {
-                slug: to_rows(build_stage(caches[slug], slug, model, "botsort", params, False))
-                for slug in slugs
-            }
-            grid[(max_gap, alpha)] = {
-                "all": evaluate(coco_gt, to_coco(coco_gt, frames_by_slug)),
-                **{slug: evaluate(coco_gt, to_coco(coco_gt, frames_by_slug, set(by_video[slug])),
-                                  by_video[slug]) for slug in slugs},
-            }
-
-    scores = {k: v["all"]["mAP_50"] for k, v in grid.items()}
-    lines.append(f"\n### {model}: parametre duyarliligi (mAP@50)\n")
-    lines.append(f"- aralik: {min(scores.values()):.3f} - {max(scores.values()):.3f} "
-                 f"(varsayilan max_gap=15, alpha=0.5: {scores[(15, 0.5)]:.3f})")
-    best = max(scores, key=scores.get)
-    lines.append(f"- en iyi kombinasyon: max_gap={best[0]}, alpha={best[1]} -> {scores[best]:.3f} "
-                 f"(test setinde secildigi icin raporlanan ana sonuc DEGIL)")
-
-    lines.append("\n### Leave-one-video-out (parametre bir videoda secilir, digerinde olculur)\n")
-    for tune_on in slugs:
-        report_on = [s for s in slugs if s != tune_on]
-        if not report_on:
-            continue
-        picked = max(grid, key=lambda k: grid[k][tune_on]["mAP_50"])
-        value = grid[picked][report_on[0]]["mAP_50"]
-        default_value = grid[(15, 0.5)][report_on[0]]["mAP_50"]
-        lines.append(f"- {tune_on} uzerinde secilen (max_gap={picked[0]}, alpha={picked[1]}) -> "
-                     f"{report_on[0]}: {value:.3f} (varsayilanla {default_value:.3f})")
 
 
 def main():
@@ -182,7 +123,6 @@ def main():
     parser.add_argument("--stages", default="raw,nms,botsort")
     parser.add_argument("--op-conf", type=float, default=0.25,
                         help="Interpolasyon kazanci sayilirken kullanilan calisma noktasi")
-    parser.add_argument("--sweep", action="store_true", help="Duyarlilik taramasi ve LOVO ekle")
     args = parser.parse_args()
 
     with contextlib.redirect_stdout(io.StringIO()):
@@ -236,9 +176,6 @@ def main():
                  "kaybina deger degil. YOLO'da tersi gecerli (gurultulu kutulari duzeltiyor), "
                  "yani bu takas dedektorun lokalizasyon kalitesine bagli.")
 
-    if args.sweep:
-        for model in args.models.split(","):
-            sweep(coco_gt, model, slugs, lines)
 
     os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
     with open(OUT_PATH, "w") as f:

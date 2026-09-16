@@ -1,13 +1,26 @@
 # Kaynak videolar (1.7 GB). Vaka calismasinin girdi verisi, repoda tutulmuyor.
-archive/
+dataset/
 
 # Baseline kosularinda uretilen isaretlenmis videolar (~13.4 GB).
 # yolo11baseline_performance.py ve dinobaseline_performance.py ile yeniden uretilebilir.
-results/baseline_*/
+results/baseline_*.zip
+results/evaluation/jsons/*.json
+
+# Tracking ara ciktilari. Yogun tespit onbellegi ve track'ler tracking/detect_cache.py
+# ve tracking/offline_tracker.py ile yeniden uretilebilir; demo videosu ~100 MB.
+# Sonuc tablosu (results/evaluation/summary_tracking.md) ve ornek kare surumlu kaliyor.
+results/tracking/detections/
+results/tracking/tracks/
+results/tracking/tracked/
+results/tracking/demo/*.mp4
+results/tracking/log_*.txt
+
+/home/ozge/Desktop/roketsan_case/roketsan_case.code-workspace
 
 # Model agirliklari. Ultralytics ve HuggingFace'ten indirilir.
 *.pt
 *.pth
+weights/
 
 # Etiketli kare paketleri. Etiketlerin kendisi dataset/*/annotations altinda
 # surumlu tutuluyor; gorseller prepare_test_set.py ile videolardan yeniden
@@ -37,3 +50,5 @@ kaggle.json
 # Gecici dogrulama ciktilari
 _smoke_tmp/
 _verify_tmp/
+
+
