@@ -145,6 +145,10 @@ Round 2'de `yolo11x` ve `dino_full` tarafında küçük bir artış görüldü. 
 
 Dedektörler her frame'i bağımsız değerlendirir. Ancak videoda aynı insan genellikle ardışık karelerde görünmeye devam eder. Bu nedenle son aşamada BoT-SORT tabanlı zamansal tracking kullanıldı.
 
+BoT-SORT'un seçilme nedeni, klasik IoU/Kalman tabanlı takip yöntemlerine ek olarak **global motion compensation (GMC)** desteği sunmasıdır. Drone videolarında yalnızca hedef insan hareket etmez; kamera da sürekli döner, yaklaşır, uzaklaşır veya yana kayar. Bu durumda ardışık iki frame arasında bütün sahne hareket ettiği için sabit kamera varsayımına dayalı takipçiler aynı kişiyi yanlış konuma taşınmış gibi görebilir. BoT-SORT içindeki `gmc_method: sparseOptFlow` ayarı, arka plandaki genel kamera hareketini optik akışla tahmin ederek kutu eşleştirmesinden önce bu hareketi telafi eder. Bu nedenle drone videosu gibi ego-hareketin yüksek olduğu bir problemde BoT-SORT, yalnızca IoU eşleştirmesi yapan daha basit takipçilere göre daha uygun görüldü.
+
+Bu çalışmada BoT-SORT yeni bir detector olarak kullanılmadı. Detector çıktıları önce cache'lendi, ardından BoT-SORT bu kutuları ardışık frame'lerde aynı kişiye ait track'lere bağlamak için kullanıldı. Yani BoT-SORT'un görevi insanı ilk kez bulmak değil, zaten üretilmiş detection kutularının zamansal sürekliliğini kullanarak daha kararlı bir çıktı üretmektir.
+
 Tracking pipeline:
 
 1. `tracking/detect_cache.py`: Her frame için detector çıktısını JSON olarak cache'ler.
