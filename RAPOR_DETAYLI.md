@@ -4,7 +4,7 @@
 
 Bu çalışmanın amacı, drone videolarında **insan** sınıfını tespit edip görüntü içerisindeki konumunu bounding box olarak belirleyen bir bilgisayarlı görü prototipi geliştirmektir. Veri setinde hazır ground-truth bulunmadığı ve tüm videoları elle etiketlemek gerçekçi olmadığı için problem yalnızca model seçimi olarak değil, aynı zamanda **veri hazırlama, aktif öğrenme ve zamansal iyileştirme** problemi olarak ele alındı.
 
-Hedef sınıf olarak insan seçildi. Drone videolarında insanlar çoğu zaman küçük, uzak, hareketli ve arka planla karışabilir durumda görünüyor. Bu da hem detection hem lokalizasyon açısından anlamlı bir zorluk oluşturuyor.
+Hedef sınıf olarak insan seçildi. Verilen datasette en çok tespit edilebilecek örnek sayısı insan class'ı için mevcut. Aynı zamanda drone videolarında insanlar çoğu zaman küçük, uzak, hareketli ve arka planla karışabilir durumda görünüyor. Bu da hem detection hem lokalizasyon açısından anlamlı bir zorluk oluşturuyor.
 
 ## 2. Veri Seçimi ve Etiketleme Stratejisi
 
@@ -35,16 +35,17 @@ Başlangıçta COCO üzerinde eğitilmiş YOLO ve Grounding DINO modelleri fine-
 
 İlk baseline değerlendirmesi:
 
-| Model | mAP@50 | mAP@50-95 | AP_Small | AP_Med | Opt. P | Opt. R | Opt. F1 | Süre (s) | FPS |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| yolo11x_640 | 0.135 | 0.089 | 0.029 | 0.149 | 0.756 | 0.110 | 0.192 | 0.088 | 11.3 |
-| yolo11x_1536 | 0.477 | 0.266 | 0.207 | 0.327 | 0.536 | 0.480 | 0.507 | 0.394 | 2.5 |
-| yolo26x_640 | 0.212 | 0.122 | 0.062 | 0.181 | 0.425 | 0.230 | 0.298 | 0.080 | 12.6 |
-| yolo26x_1536 | 0.535 | 0.300 | 0.249 | 0.344 | 0.574 | 0.500 | 0.534 | 0.404 | 2.5 |
-| dino_full | 0.418 | 0.247 | 0.201 | 0.311 | 0.439 | 0.440 | 0.440 | 1.550 | 0.6 |
-| dino_tiled | 0.622 | 0.549 | 0.570 | 0.531 | 0.578 | 0.680 | 0.625 | 8.042 | 0.1 |
+| Model           | mAP@50   | mAP@50-95 | AP_Small | AP_Med   | Opt. P   | Opt. R   | Opt. F1  | Sure (s) | FPS   |
+|-----------------|----------|-----------|----------|----------|----------|----------|----------|----------|-------|
+| yolo11x_640     | 0.548    | 0.381     | 0.129    | 0.547    | 0.849    | 0.460    | 0.597    | 0.095    | 10.5  |
+| yolo11x_1536    | 0.643    | 0.455     | 0.281    | 0.576    | 0.802    | 0.600    | 0.686    | 0.392    | 2.6   |
+| yolo26x_640     | 0.695    | 0.477     | 0.271    | 0.590    | 0.909    | 0.600    | 0.723    | 0.080    | 12.6  |
+| yolo26x_1536    | 0.737    | 0.503     | 0.354    | 0.590    | 0.854    | 0.660    | 0.745    | 0.406    | 2.5   |
+| dino_full       | 0.896    | 0.695     | 0.634    | 0.727    | 0.982    | 0.810    | 0.888    | 1.534    | 0.7   |
+| dino_tiled      | 0.875    | 0.724     | 0.637    | 0.769    | 0.940    | 0.810    | 0.870    | 3.845    | 0.3   |
 
-Bu tabloda en önemli gözlem, küçük nesne performansının girdi çözünürlüğüne çok duyarlı olmasıdır. YOLO11x modelinde 640 çözünürlükten 1536 çözünürlüğe çıkınca mAP@50 0.135'ten 0.477'ye yükseldi. Benzer şekilde YOLO26x için 0.212'den 0.535'e çıktı.
+
+Bu tabloda en önemli gözlem, küçük nesne performansının girdi çözünürlüğüne çok duyarlı olmasıdır. YOLO11x modelinde 640 çözünürlükten 1536 çözünürlüğe çıkınca mAP@50 0.548'den 0.643'e yükseldi. Benzer şekilde YOLO26x için 0.695'ten 0.737'ye çıktı.
 
 Bu yüzden sonraki deneylerde YOLO'nun 640 varyantları ayrıca fine-tune edilmedi. Çünkü 1536 varyantları baseline aşamasında hem YOLO11x hem YOLO26x için açık şekilde daha iyi performans verdi. Eğitim bütçesi daha anlamlı olan 1536 çözünürlükteki modellere ayrıldı.
 
@@ -67,8 +68,6 @@ Grounding DINO standart kullanımda görüntüyü modele vermeden önce yeniden 
 
 Bu yöntemde görüntü örtüşen parçalara ayrılıyor, her parça ayrı ayrı DINO'ya veriliyor, çıkan kutular global koordinata taşınıyor ve NMS/kapsama bastırması ile birleştiriliyor.
 
-Bu yaklaşım özellikle küçük hedeflerde etkili oldu. İlk baseline tablosunda `dino_full` AP_Small 0.201 iken `dino_tiled` AP_Small 0.570'e çıktı. Bu, küçük nesne probleminde yalnızca model seçiminin değil, çıkarım stratejisinin de kritik olduğunu gösterdi.
-
 ## 6. Alternatif Yaklaşım 2: Aktif Öğrenme ve Fine-tune
 
 Tüm eğitim videolarını elle etiketlemek yerine aktif öğrenme uygulandı. Amaç, en bilgilendirici frameleri seçip yalnızca bu frameleri elle etiketlemekti.
@@ -90,19 +89,19 @@ Bu skora ek olarak çeşitlilik filtresi kullanıldı. Aynı videodan birbirine 
 
 Aktif öğrenme iki tur halinde uygulandı:
 
-| Tur | Eklenen frame | Açıklama |
+| Tur | Toplam frame | Açıklama |
 |---|---:|---|
-| Round 1 | 50 | İlk aktif öğrenme seçimi; DINO tiled ve YOLO uyuşmazlığına göre seçilip elle düzeltildi. |
-| Round 2 | 43 | Round 1 sonrası fine-tune edilen model yeniden öğrenci olarak kullanıldı; önceki turdaki kareler havuzdan çıkarıldı. |
-| **Toplam** | **93** | Nihai aktif öğrenme eğitim seti. |
+| Round 1 | 93 | İlk aktif öğrenme seçimi; DINO tiled ve YOLO uyuşmazlığına göre seçilip elle düzeltildi. |
+| Round 2 | 40 | Round 1 sonrası fine-tune edilen model yeniden öğrenci olarak kullanıldı; önceki turdaki kareler havuzdan çıkarıldı. |
+| **Toplam** | **133** | Nihai aktif öğrenme eğitim seti. |
 
-Nihai aktif öğrenme veri setinde toplam **93 frame ve 445 bbox** bulunuyor. Eğitim notebook'larında split video prefix'e göre yapıldı:
+Nihai aktif öğrenme veri setinde toplam **133 frame ve 639 bbox** bulunuyor. Eğitim notebook'larında split video prefix'e göre yapıldı:
 
 | Split | Frame | Bbox |
 |---|---:|---:|
-| Train | 73 | 397 |
-| Validation | 20 | 48 |
-| **Toplam** | **93** | **445** |
+| Train | 108 | 580 |
+| Validation | 24 | 59 |
+| **Toplam** | **133** | **639** |
 
 Not: Yerel COCO annotation dosyasında round bilgisi ayrı bir alan olarak tutulmadığı için Round 2'de eklenen 43 frame'in train/validation kırılımı doğrudan dosyadan ayrıştırılamıyor. Bu nedenle raporda Round 2 toplam ekleme ve nihai train/validation dağılımı birlikte verildi.
 
@@ -245,7 +244,6 @@ Güçlü yönler:
 Zayıf yönler:
 
 - Test seti sınırlı büyüklükte.
-- Fine-tune checkpoint seçimi ideal olarak ayrı bir validation setiyle yapılmalıydı.
 - DINO tiled yüksek doğruluk verse de gerçek zamanlı kullanım için yavaş.
 - Offline tracking gelecek frame bilgisinden faydalanabildiği için gerçek zamanlı sistemle birebir aynı değildir.
 
