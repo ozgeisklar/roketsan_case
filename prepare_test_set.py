@@ -1,17 +1,3 @@
-"""
-Test (ground-truth) seti hazırlama: seyrek kare örnekleme + yüksek recall ön-etiketleme.
-
-Test videoları eğitimde hiç kullanılmaz. Kareler saniyede bir alınır çünkü 30 FPS'de
-ardışık kareler arasındaki bilgi farkı neredeyse sıfırdır; her kareyi etiketlemek
-etiketleme maliyetini 30 katına çıkarırken test setinin bilgi içeriğini artırmaz.
-
-Ön-etiketler döşemeli öğretmenle DÜŞÜK eşikte üretilir. Amaç precision değil recall:
-insan operatörün iş yükü "sıfırdan kutu çizmek" yerine "fazlalıkları silmek" olsun.
-Bu, ön-etiketleme yanlılığını da azaltır, çünkü kaçırılan kutu sayısı düşer.
-
-Çıktı: CVAT for images 1.1 XML (elle düzeltme için) ve COCO JSON (değerlendirme için).
-"""
-
 import argparse
 import json
 import os
@@ -22,12 +8,11 @@ from xml.etree import ElementTree as ET
 
 import cv2
 
-from tiled_dino import TiledGroundingDino, draw_detections, tiling_report
+from tiled_dino import TiledGroundingDino, draw_detections
 
 # Envanter analizine göre test setine alınan videolar ve seçim gerekçeleri
-# (bkz. results/video_inventory_summary.md). Kalan 7 video eğitimde kullanılır.
+# (results/video_inventory_summary.md). Kalan 7 video eğitimde kullanılır.
 SELECTION_RATIONALE = {
-    "DJI_0596.MP4": "4K yuksek irtifa - YOLO11x bu videoda 0 tespit yapti, DINO 62 buldu",
     "Stockflue Flyaround.mp4": "En yuksek kucuk-nesne orani (COCO small %60)",
     "Surenen Pass Trail Running.mp4": "Dinamik takip - patikada kosan sporcu (%49 small)",
 }
@@ -43,12 +28,6 @@ def slugify(video_name):
 
 
 def sample_frames(video_path, interval, out_dir, slug, jpeg_quality=95):
-    """
-    Videoyu sıralı okuyup her `interval` karede birini diske yazar.
-
-    Sıralı okuma tercih edildi: CAP_PROP_POS_FRAMES ile atlama 4K H.264/HEVC
-    akışlarında yavaş ve kare indeksi açısından güvenilmez olabiliyor.
-    """
     cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
         raise RuntimeError(f"{video_path} açılamadı")
@@ -209,11 +188,6 @@ def main():
                 "file_name": file_name, "video": video_name,
                 "frame_index": frame_idx, "width": w, "height": h,
             })
-        rep = tiling_report(saved[0][2], saved[0][3], args.overlap)
-        print(f"  {len(saved)} kare kaydedildi ({rep['resolution']}) | "
-              f"dosem: {rep['grid']} -> parca {rep['tile_size']}, "
-              f"cozunurluk kazanci {rep['resolution_gain']}x, "
-              f"{rep['forward_passes']} model gecisi/kare")
 
     # CVAT bir gorsel klasorunu alfabetik siralar; ayni sirayi kullaniyoruz
     frame_records.sort(key=lambda r: r["file_name"])
