@@ -27,7 +27,7 @@ def get_yolo_predictor(model_path, imgsz):
     return predict
 
 def get_dino_predictor(tiled=False):
-    dino = TiledGroundingDino(model_name="/home/ozge/Desktop/roketsan_case/dino_tuned_round2")
+    dino = TiledGroundingDino()
     def predict(image):
         start_time = time.time()
         # AP hesabi icin dusuk esik
@@ -40,10 +40,12 @@ def get_dino_predictor(tiled=False):
     return predict
 
 CONFIGS = {
-    "yolo11x_1536_filtered": lambda: get_yolo_predictor("/home/ozge/Desktop/roketsan_case/yolo11x_tuned_round2.pt", 1536),
-    "yolo26x_1536_filtered": lambda: get_yolo_predictor("/home/ozge/Desktop/roketsan_case/yolo26x_tuned_round2.pt", 1536),
-    "dino_full_filtered": lambda: get_dino_predictor(tiled=False),
-    "dino_tiled_filtered": lambda: get_dino_predictor(tiled=True),
+    "yolo11x_640": lambda: get_yolo_predictor("/home/ozge/Desktop/roketsan_case/weights/yolo11x.pt", 640),
+    "yolo11x_1536": lambda: get_yolo_predictor("/home/ozge/Desktop/roketsan_case/weights/yolo11x.pt", 1536),
+    "yolo26x_640": lambda: get_yolo_predictor("/home/ozge/Desktop/roketsan_case/weights/yolo26x.pt", 640),
+    "yolo26x_1536": lambda: get_yolo_predictor("/home/ozge/Desktop/roketsan_case/weights/yolo26x.pt", 1536),
+    "dino_full": lambda: get_dino_predictor(tiled=False),
+    "dino_tiled": lambda: get_dino_predictor(tiled=True),
 }
 
 def main():
@@ -164,7 +166,7 @@ def main():
             "FPS": float(fps)
         }
         
-    summary_path = os.path.join(args.out, "trial.json")
+    summary_path = os.path.join(args.out, "summary.json")
     with open(summary_path, "w") as f:
         json.dump(results_summary, f, indent=4)
         
@@ -178,7 +180,7 @@ def main():
     for m, s in results_summary.items():
         print(f"| {m:<15} | {s['mAP_50']:<8.3f} | {s['mAP_50_95']:<9.3f} | {s['mAP_small']:<8.3f} | {s['mAP_medium']:<8.3f} | {s['Optimal_Precision_50']:<8.3f} | {s['Optimal_Recall_50']:<8.3f} | {s['Optimal_F1_50']:<8.3f} | {s['Inference_Time_s']:<8.3f} | {s['FPS']:<5.1f} |")
     
-    md_path = os.path.join(args.out, "trial.md")
+    md_path = os.path.join(args.out, "summary.md")
     with open(md_path, "w") as f:
         f.write("# Baseline Model Performans Karsilastirmasi\n\n")
         f.write(header + "\n")

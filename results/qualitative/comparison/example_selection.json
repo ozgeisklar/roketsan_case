@@ -1,0 +1,29 @@
+{
+  "video": "/home/ozge/Desktop/roketsan_case/results/qualitative/comparison/stockflue_2x2_qualitative_comparison.mp4",
+  "examples": {
+    "success": {
+      "frame": 150,
+      "gt": 2,
+      "baseline_hit": 0,
+      "yolo_track_hit": 2,
+      "dino_track_hit": 2,
+      "disagreement": 2
+    },
+    "failure": {
+      "frame": 0,
+      "gt": 3,
+      "baseline_hit": 0,
+      "yolo_track_hit": 0,
+      "dino_track_hit": 1,
+      "disagreement": 2
+    },
+    "uncertain": {
+      "frame": 30,
+      "gt": 3,
+      "baseline_hit": 0,
+      "yolo_track_hit": 0,
+      "dino_track_hit": 2,
+      "disagreement": 4
+    }
+  }
+}

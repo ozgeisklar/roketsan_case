@@ -1,332 +1,263 @@
-# Drone Videolarinda Nesne Tespiti ve Lokalizasyonu
+# Drone Videolarında İnsan Tespiti ve Zamansal İyileştirme Raporu
 
-Hedef sinif: **insan (person)**
-Veri seti: [Kaggle Drone Videos](https://www.kaggle.com/datasets/kmader/drone-videos)
-Donanim: tek GPU (lokal GTX 1650 degerlendirme, Kaggle T4 egitim)
+## 1. Amaç
 
----
+Bu çalışmanın amacı, drone videolarında **insan** sınıfını tespit edip görüntü içerisindeki konumunu bounding box olarak belirleyen bir bilgisayarlı görü prototipi geliştirmektir. Veri setinde hazır ground-truth bulunmadığı ve tüm videoları elle etiketlemek gerçekçi olmadığı için problem yalnızca model seçimi olarak değil, aynı zamanda **veri hazırlama, aktif öğrenme ve zamansal iyileştirme** problemi olarak ele alındı.
 
-## 1. Problem Tanimi ve Yaklasim Ozeti
+Hedef sınıf olarak insan seçildi. Verilen datasette en çok tespit edilebilecek örnek sayısı insan class'ı için mevcut. Aynı zamanda drone videolarında insanlar çoğu zaman küçük, uzak, hareketli ve arka planla karışabilir durumda görünüyor. Bu da hem detection hem lokalizasyon açısından anlamlı bir zorluk oluşturuyor.
 
-Arsiv buyuk olcude etiketsiz ve tamamini etiketlemek gercekci degil. Bu yuzden problem "veri etiketleme problemi" olarak ele alindi: **hangi karelerin etiketlenmesi en cok fayda saglar?**
+## 2. Veri Seçimi ve Etiketleme Stratejisi
 
-Cozum uc bagimsiz eksende gelistirildi:
+Önce veri setindeki videolar `analyze_video_inventory.py` ile analiz edildi. Bu analizde çözünürlük, toplam kare sayısı, tespit yoğunluğu, kutu boyutu dağılımı ve COCO small/medium/large oranları çıkarıldı. Sonuçlar `results/video_inventory_summary.md` içinde tutuldu.
 
-| Eksen | Yaklasim | Cozdugu problem |
-|---|---|---|
-| A | Doseme (tiled / SAHI benzeri) cikarim | Cozunurluk kaybindan kaynaklanan kucuk nesne kaybi |
-| B | Aktif ogrenme + fine-tune | Etiket butcesini en bilgilendirici karelere harcamak |
-| C | Zamansal tracking + interpolasyon | Dedektorun tek tek karelerde kacirdigi nesneler |
+Test tarafında özellikle iki video öne çıkarıldı:
 
-Bunlar ayni yontemin parametre varyasyonlari degil; sirasiyla **cikarim stratejisi**, **veri secim stratejisi** ve **zamansal cikarsama** katmanlarina mudahale ediyor.
+- `Stockflue Flyaround.mp4`: 1280x720 çözünürlükte, insan kutularının yaklaşık %59.6'sı COCO small kategorisinde. Küçük hedefler ve kamera hareketi nedeniyle zor bir sahne.
+- `Surenen Pass Trail Running.mp4`: 406x720 çözünürlükte, koşan insan içeren dinamik bir takip sahnesi. İnsan kutularının yaklaşık %49.5'i COCO small kategorisinde.
 
----
+Test için her 30 karede bir frame alındı. Bunun nedeni 30 FPS videolarda ardışık karelerin çok benzer bilgi taşımasıdır. Her frame'i etiketlemek test setini sayısal olarak büyütse de bilgi çeşitliliğini aynı oranda artırmaz ve manuel etiketleme maliyetini gereksiz yükseltir.
 
-## 2. Kullanilan Veri ve Bolme Stratejisi
+Filtered test seti:
 
-Once 10 videonun tamami taranip olcek istatistikleri cikarildi ([`analyze_video_inventory.py`](analyze_video_inventory.py) -> [`results/video_inventory_summary.md`](results/video_inventory_summary.md)). Toplam 10.622 kare.
+| Video | Test frame | GT bbox |
+|---|---:|---:|
+| `Stockflue Flyaround.mp4` | 24 | 53 |
+| `Surenen Pass Trail Running.mp4` | 40 | 80 |
+| **Toplam** | **64** | **133** |
 
-Bolme veriye dayali yapildi: test setine **kucuk nesne orani en yuksek** ve **baseline modelin en cok zorlandigi** videolar alindi.
+Test etiketleri `prepare_test_set.py` ile hazırlandı. Script önce seyrek frameleri kaydetti, ardından Grounding DINO ile ön etiket üretti. Bu ön etiketler CVAT'a aktarıldı ve elle düzeltilerek COCO formatında ground-truth elde edildi.
 
-| Bolum | Videolar | Kare | Etiketli kutu |
-|---|---|---|---|
-| Test | DJI_0596, Stockflue Flyaround, Surenen Pass Trail Running | 100 (30 karede bir) | 584 |
-| Test (filtered) | Stockflue (24 kare / 53 kutu), Surenen (40 kare / 80 kutu) | 64 | 133 |
-| Train | Kalan 7 video, aktif ogrenme secimi | 93 | 445 |
+Ön etiketleme yüksek recall mantığıyla yapıldı. Yanlış pozitif kutuları silmek, sıfırdan kutu çizmekten daha hızlı olduğu için DINO eşiği kontrollü şekilde düşük tutuldu.
 
-Toplam elle etiketlenen: **193 kare, arsivin ~%1.8'i**.
+## 3. Başlangıç Yaklaşımı: Baseline Modeller
 
-**Kare ornekleme araligi neden 30?** 30 FPS'te ardisik kareler arasindaki bilgi farki neredeyse sifir; her kareyi etiketlemek maliyeti 30 katina cikarirken test setinin bilgi icerigini artirmiyor.
+Başlangıçta COCO üzerinde eğitilmiş YOLO ve Grounding DINO modelleri fine-tune edilmeden test edildi. YOLO tarafında `yolo11x` ve `yolo26x`, DINO tarafında `IDEA-Research/grounding-dino-base` kullanıldı.
 
-**DJI_0596 hakkinda durust not:** Bu video tek basina 584 kutunun 451'ini (%77) icerir ve 4K yuksek irtifa oldugu icin acik ara en zor videodur. Ana karsilastirma tablolari `instances_filtered.json` (64 kare / 133 kutu) uzerinde uretildi, yani **bu video metriklerin disinda**. Bu, raporlanan skorlari yukari cekiyor; tam GT sonuclari [`results/evaluation/summary.md`](results/evaluation/summary.md) icinde ayrica duruyor.
+İlk baseline değerlendirmesi:
 
-### Etiketleme Sureci
+| Model           | mAP@50   | mAP@50-95 | AP_Small | AP_Med   | Opt. P   | Opt. R   | Opt. F1  | Sure (s) | FPS   |
+|-----------------|----------|-----------|----------|----------|----------|----------|----------|----------|-------|
+| yolo11x_640     | 0.548    | 0.381     | 0.129    | 0.547    | 0.849    | 0.460    | 0.597    | 0.095    | 10.5  |
+| yolo11x_1536    | 0.643    | 0.455     | 0.281    | 0.576    | 0.802    | 0.600    | 0.686    | 0.392    | 2.6   |
+| yolo26x_640     | 0.695    | 0.477     | 0.271    | 0.590    | 0.909    | 0.600    | 0.723    | 0.080    | 12.6  |
+| yolo26x_1536    | 0.737    | 0.503     | 0.354    | 0.590    | 0.854    | 0.660    | 0.745    | 0.406    | 2.5   |
+| dino_full       | 0.896    | 0.695     | 0.634    | 0.727    | 0.982    | 0.810    | 0.888    | 1.534    | 0.7   |
+| dino_tiled      | 0.875    | 0.724     | 0.637    | 0.769    | 0.940    | 0.810    | 0.870    | 3.845    | 0.3   |
 
-1. [`prepare_test_set.py`](prepare_test_set.py) videoyu sirali `cap.read()` ile okur, her 30. kareyi `{slug}_f{kare:06d}.jpg` olarak kaydeder (bu adlandirma daha sonra tracking ciktisini GT'ye geri eslemek icin kritik).
-2. Ayni script dosemeli Grounding DINO ile **dusuk esikte (0.15) on-etiket** uretir. Amac precision degil recall: operatorun isi "sifirdan kutu cizmek" yerine "fazlaligi silmek" olur, bu da on-etiketleme yanliligini azaltir.
-3. CVAT 1.1 XML olarak export edilir, CVAT Community'de elle duzeltilir, COCO JSON olarak geri alinir.
 
-Kullanilan araclar: CVAT (etiketleme), `pycocotools` (metrik), `ultralytics` (YOLO + tracker), HuggingFace `transformers` (Grounding DINO).
+Bu tabloda en önemli gözlem, küçük nesne performansının girdi çözünürlüğüne çok duyarlı olmasıdır. YOLO11x modelinde 640 çözünürlükten 1536 çözünürlüğe çıkınca mAP@50 0.548'den 0.643'e yükseldi. Benzer şekilde YOLO26x için 0.695'ten 0.737'ye çıktı.
 
----
+Bu yüzden sonraki deneylerde YOLO'nun 640 varyantları ayrıca fine-tune edilmedi. Çünkü 1536 varyantları baseline aşamasında hem YOLO11x hem YOLO26x için açık şekilde daha iyi performans verdi. Eğitim bütçesi daha anlamlı olan 1536 çözünürlükteki modellere ayrıldı.
 
-## 3. Baslangic Yaklasimi (Baseline)
+## 4. Filtered Test Seti ile Baseline Tekrarı
 
-COCO ile onceden egitilmis modeller, **hicbir fine-tune olmadan**, tam kare cikarimla. Tam GT (100 kare / 584 kutu) uzerinde:
+Filtered test seti üzerinde baseline modeller tekrar değerlendirildi. Bu tablo, fine-tune ve tracking aşamalarının karşılaştırıldığı ana referans olarak kullanıldı.
 
-| Model | mAP@50 | mAP@50-95 | AP_Small | Opt. F1 | FPS |
-|---|---|---|---|---|---|
-| yolo11x @640 | 0.135 | 0.089 | 0.029 | 0.192 | 11.3 |
-| yolo11x @1536 | 0.477 | 0.266 | 0.207 | 0.507 | 2.5 |
-| yolo26x @640 | 0.212 | 0.122 | 0.062 | 0.298 | 12.6 |
-| yolo26x @1536 | 0.535 | 0.300 | 0.249 | 0.534 | 2.5 |
-| dino_full (zero-shot) | 0.418 | 0.247 | 0.201 | 0.440 | 0.6 |
-| **dino_tiled (zero-shot)** | **0.622** | **0.549** | **0.570** | **0.625** | 0.1 |
+| Model | mAP@50 | mAP@50-95 | AP_Small | AP_Med | Opt. P | Opt. R | Opt. F1 | Süre (s) | FPS |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| yolo11x_1536_filtered | 0.643 | 0.455 | 0.281 | 0.576 | 0.802 | 0.600 | 0.686 | 0.409 | 2.4 |
+| yolo26x_1536_filtered | 0.737 | 0.503 | 0.354 | 0.590 | 0.854 | 0.660 | 0.745 | 0.413 | 2.4 |
+| dino_full_filtered | 0.896 | 0.695 | 0.634 | 0.727 | 0.982 | 0.810 | 0.888 | 1.543 | 0.6 |
+| dino_tiled_filtered | 0.875 | 0.724 | 0.637 | 0.769 | 0.940 | 0.810 | 0.870 | 3.879 | 0.3 |
 
-Her tespit icin guven skoru uretiliyor: YOLO icin sinif olasiligi, DINO icin metin-kutu benzerlik skoru (`person.` prompt'u ile).
+Filtered test setinde DINO modellerinin güçlü başladığı görülüyor. YOLO tarafında ise özellikle `yolo11x_1536` hâlâ iyileştirmeye açık durumdaydı.
 
-### Gozlemlenen Temel Problemler
+## 5. Alternatif Yaklaşım 1: Döşemeli Grounding DINO
 
-1. **Kucuk nesne kaybi baskin hata kaynagi.** yolo11x @640'ta AP_Small 0.029, yani uzak insanlar pratikte hic bulunamiyor. Girdi 640'tan 1536'ya cikarildiginda mAP@50 0.135'ten 0.477'ye ciktı: hatanin buyuk kismi mimariden degil **etkin cozunurlukten** kaynakliyor.
-2. **DINO'nun gizli yeniden boyutlandirmasi.** Grounding DINO'nun image processor'i girdiyi `shortest_edge=800 / longest_edge=1333`'e kuculuyor. 4K bir kare modele girmeden once 2.88 kat kuculuyor; 60 piksellik bir insan 21 piksele iniyor ve kayboluyor.
-3. **DINO halusinasyonu.** Dokusuz bolgelerde (kar, su, gokyuzu) kesitin tamamini "person" olarak kutuluyor ve bu kutular 0.30+ skor alabiliyor. Gercek uzak insanlar 0.17-0.25 aldigi icin **esik yukseltmek ise yaramiyor**: once gercek insanlar kayboluyor, cop kaliyor.
+Grounding DINO standart kullanımda görüntüyü modele vermeden önce yeniden boyutlandırıyor. Drone videolarında insanlar zaten küçük olduğu için bu yeniden boyutlandırma uzak hedefleri daha da küçültüyor. Bu nedenle `tiled_dino.py` içinde döşemeli çıkarım geliştirildi.
 
----
+Bu yöntemde görüntü örtüşen parçalara ayrılıyor, her parça ayrı ayrı DINO'ya veriliyor, çıkan kutular global koordinata taşınıyor ve NMS/kapsama bastırması ile birleştiriliyor.
 
-## 4. Alternatif Yaklasim A: Dosemeli (Tiled) Cikarim
+## 6. Alternatif Yaklaşım 2: Aktif Öğrenme ve Fine-tune
 
-[`tiled_dino.py`](tiled_dino.py). Kare ortusen parcalara bolunur, her parca ayri modelden gecer, sonuclar global koordinata tasinip birlestirilir.
+Tüm eğitim videolarını elle etiketlemek yerine aktif öğrenme uygulandı. Amaç, en bilgilendirici frameleri seçip yalnızca bu frameleri elle etiketlemekti.
 
-Teknik kararlar:
+`kaggle_active_learning_selection.ipynb` içinde her aday frame için iki model çalıştırıldı:
 
-- `auto_grid()`: 4K -> 3x3, 720p -> 2x2, 406x720 gibi zaten kucuk kareler -> 1x1 (bolmek fayda saglamaz).
-- `tile_windows()`: parcalar **esit boyutta** uretilir, boylece processor her parcaya ayni olceklemeyi uygular.
-- Tam kare gecisi de eklenir: parcalar kucuk/uzak insanlari, tam kare parcaya sigmayan buyuk insanlari yakalar.
-- `geometric_filter()`: halusinasyon ayirt edici ozelligi **skor degil geometri**. Mutlak piksel alan siniri (parca alaninin %25'i), minimum alan ve en-boy orani kontrolu, birlestirmeden **once** her gecise ayni sinirla uygulanir.
-- `suppress_contained()`: NMS'in yakalayamadigi durum. Parca sinirinda kesilen bir insanin yarim kutusu ile tam kutusunun IoU'su dusuk kalir ama yarim kutu tam kutunun **icindedir**; %80 kapsama uzerinde bastirilir.
+- Grounding DINO tiled: öğretmen model
+- YOLO: öğrenci model
 
-**Sonuc:** dino_full 0.418 -> dino_tiled 0.622 mAP@50. Asil kazanc kucuk nesnelerde: AP_Small 0.201 -> 0.570 (2.8 kat). Maliyet: 0.6 FPS -> 0.1 FPS.
+Seçim skoru şu fikirlere dayandı:
 
----
+- DINO'nun bulduğu ama YOLO'nun kaçırdığı insanlar
+- Küçük kutular
+- Düşük/orta güvenli belirsiz DINO tespitleri
+- YOLO'nun tek başına ürettiği şüpheli kutular
+- Kalabalık sahneler
 
-## 5. Alternatif Yaklasim B: Aktif Ogrenme + Fine-tune
+Bu skora ek olarak çeşitlilik filtresi kullanıldı. Aynı videodan birbirine çok yakın frameler seçilmedi; böylece birbirinin neredeyse kopyası olan karelere etiketleme bütçesi harcanmadı.
 
-[`kaggle_active_learning_selection.ipynb`](kaggle_active_learning_selection.ipynb). Etiket butcesi rastgele degil, **ogretmen-ogrenci uyusmazligina** gore harcanir.
+Aktif öğrenme iki tur halinde uygulandı:
 
-Aday havuzu 7 egitim videosundan 10 karede bir ornekle olusturulur. Her aday icin dosemeli DINO (ogretmen) ve YOLO (ogrenci) ayri ayri kosturulup skor hesaplanir:
+| Tur | Toplam frame | Açıklama |
+|---|---:|---|
+| Round 1 | 93 | İlk aktif öğrenme seçimi; DINO tiled ve YOLO uyuşmazlığına göre seçilip elle düzeltildi. |
+| Round 2 | 40 | Round 1 sonrası fine-tune edilen model yeniden öğrenci olarak kullanıldı; önceki turdaki kareler havuzdan çıkarıldı. |
+| **Toplam** | **133** | Nihai aktif öğrenme eğitim seti. |
 
-```python
-al_score = (4.0 * missed_by_yolo      # YOLO'nun ogrenmesi gereken DINO destekli insan
-          + 2.5 * small_dino          # AP_Small'i dogrudan hedefler
-          + 1.5 * medium_uncertain    # 0.15-0.35 skor bandi: insan etiketi en cok bilgiyi burada verir
-          + 1.0 * yolo_only           # YOLO'nun FP urettigi zor arka planlar
-          + 2.0 * crowded             # kalabalik sahne: hem kacirma hem duplicate artar
-          + 0.2 * len(dino_boxes))
-```
+Nihai aktif öğrenme veri setinde toplam **133 frame ve 639 bbox** bulunuyor. Eğitim notebook'larında split video prefix'e göre yapıldı:
 
-Ardindan **cesitlilik filtresi**: ayni videodan `MIN_GAP_FRAMES` yakinindaki kareler elenir. Yoksa skor en yuksek sahnenin 5 ardisik karesi secilir ve bunlar neredeyse ayni bilgiyi tasir.
+| Split | Frame | Bbox |
+|---|---:|---:|
+| Train | 108 | 580 |
+| Validation | 24 | 59 |
+| **Toplam** | **133** | **639** |
 
-**Iki tur kosuldu.** Round 1: 50 kare. Round 2: ogrenci artik round 1'de fine-tune edilmis `best.pt`, yani uyusmazlik guncel modele gore hesaplaniyor; onceki turun kareleri havuzdan cikarilip 43 yeni kare secildi. Toplam 93 kare / 445 kutu.
+Not: Yerel COCO annotation dosyasında round bilgisi ayrı bir alan olarak tutulmadığı için Round 2'de eklenen 43 frame'in train/validation kırılımı doğrudan dosyadan ayrıştırılamıyor. Bu nedenle raporda Round 2 toplam ekleme ve nihai train/validation dağılımı birlikte verildi.
 
-Round 2'de butce 43'te tutuldu cunku havuzun o mesafedeki gercek kapasitesi bu: daha fazlasini istemek round 1 karelerinin komsularini etiketletir, ki bunlar yeni bilgi tasimaz.
+YOLO fine-tune sırasında iki önemli eğitim problemi çözüldü:
 
-### Fine-tune Ayarlari
+- `single_cls=True` kaldırıldı. Bu ayar Ultralytics içinde `nc=1` zorladığı için pretrained sınıflandırma kafasının transferini bozabiliyordu.
+- `data.yaml` içine COCO'nun 80 sınıf ismi yazıldı. Böylece pretrained person bilgisi korunmuş oldu.
+- `optimizer=AdamW`, düşük öğrenme oranı, `freeze=23`, `warmup_epochs=5` gibi ayarlarla küçük veri üzerinde eğitim daha stabil hale getirildi.
 
-YOLO ([`kaggle_finetune_yolo.ipynb`](kaggle_finetune_yolo.ipynb)): `imgsz=1536, batch=4, optimizer=AdamW, lr0=0.0001, freeze=23, warmup_epochs=5, epochs=50, save_period=5`.
+YOLO eğitim ayarları: `epochs=50`, `imgsz=1536`, `batch=4`, `optimizer=AdamW`, `lr0=0.0001`, `freeze=23`, `save_period=5`.
 
-DINO ([`kaggle_finetune_dino_active.ipynb`](kaggle_finetune_dino_active.ipynb)): `LR=1e-5, EPOCHS=50, GRAD_ACCUM=4`, **dosemeli egitim** (`TILE=True`) - egitim ile cikarim ayni olcekte olsun diye.
+DINO fine-tune ayarları: `epochs=50`, `LR=1e-5`, `GRAD_ACCUM=4`, `TILE=True`.
 
-Yol boyunca cozulen iki gercek hata:
+## 7. Fine-tune Sonuçları: Round 1
 
-- **`optimizer=auto` + `nbs=64`**: auto `lr0`'i 0.002'ye cekiyordu ve `batch=4` ile `accumulate=16` olusuyordu, yani epoch basina ~1 optimizer adimi. `cls_loss` patliyor, mAP 0'da kaliyordu.
-- **`single_cls=True`**: Ultralytics bunu gorunce `data["nc"]=1` yapiyor ve **pretrained siniflandirma kafasini rastgele yeniden baslatiyor**. Kaldirilip `data.yaml`'a 80 COCO sinif adi yazildi; boylece 1015/1015 tensor transfer oldu ve model "person"i sifirdan ogrenmek zorunda kalmadi.
+Round 1 sonrası filtered test seti sonuçları:
 
-### Fine-tune Sonuclari (filtered GT: 64 kare / 133 kutu)
+| Model | mAP@50 | mAP@50-95 | AP_Small | AP_Med | Opt. P | Opt. R | Opt. F1 | Süre (s) | FPS |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| yolo11x_1536_filtered | 0.745 | 0.515 | 0.406 | 0.593 | 0.754 | 0.690 | 0.721 | 0.405 | 2.5 |
+| yolo26x_1536_filtered | 0.758 | 0.510 | 0.377 | 0.597 | 0.852 | 0.690 | 0.762 | 0.410 | 2.4 |
+| dino_full_filtered | 0.898 | 0.641 | 0.580 | 0.686 | 0.982 | 0.840 | 0.906 | 1.559 | 0.6 |
+| dino_tiled_filtered | 0.914 | 0.648 | 0.577 | 0.700 | 0.983 | 0.850 | 0.912 | 4.029 | 0.2 |
 
-| Model | Zero-shot | Round 1 | Round 2 |
-|---|---|---|---|
-| yolo11x_1536 | 0.643 | 0.745 | **0.760** |
-| yolo26x_1536 | 0.737 | 0.758 | 0.749 |
-| dino_full | 0.896 | 0.898 | 0.906 |
-| dino_tiled | 0.875 | 0.914 | **0.914** |
+Round 1 özellikle YOLO tarafında belirgin iyileşme sağladı. `yolo11x_1536_filtered` mAP@50 değeri 0.643'ten 0.745'e çıktı.
 
-En buyuk kazanc en zayif modelde: yolo11x +0.117 mAP@50, AP_Small 0.281 -> 0.401. DINO zaten guclu oldugu icin marjinal iyilesti.
+## 8. Fine-tune Sonuçları: Round 2
 
-**Metodolojik uyari:** Checkpoint secimi (5/10/15/20/25. epoch) GT test seti uzerinde degerlendirilerek yapildi ([`yolo11_select.md`](yolo11_select.md)). Bu bir test seti secimi biasi; ayri bir validation seti ile yapilmasi daha dogru olurdu. Skorlar bu yonde iyimser.
+Round 2 sonrası filtered test seti sonuçları:
 
----
+| Model | mAP@50 | mAP@50-95 | AP_Small | AP_Med | Opt. P | Opt. R | Opt. F1 | Süre (s) | FPS |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| yolo11x_1536_filtered | 0.760 | 0.529 | 0.401 | 0.611 | 0.838 | 0.660 | 0.738 | 0.401 | 2.5 |
+| yolo26x_1536_filtered | 0.749 | 0.510 | 0.380 | 0.599 | 0.827 | 0.680 | 0.746 | 0.408 | 2.4 |
+| dino_full_filtered | 0.906 | 0.650 | 0.579 | 0.698 | 0.974 | 0.840 | 0.902 | 1.551 | 0.6 |
+| dino_tiled_filtered | 0.914 | 0.664 | 0.579 | 0.724 | 0.958 | 0.860 | 0.907 | 3.847 | 0.3 |
 
-## 6. Alternatif Yaklasim C: Zamansal Tracking
+Round 2'de `yolo11x` ve `dino_full` tarafında küçük bir artış görüldü. `yolo26x` çok küçük bir düşüş gösterdi; filtered test seti 133 kutu ile sınırlı olduğu için bu fark birkaç kutuluk değişimden etkilenebilir.
 
-Dedektor her kareye bagimsiz bakiyor, ama insan bir onceki ve sonraki karede goruluyor. Bu bilgi kullanilmiyordu.
+## 9. Alternatif Yaklaşım 3: Zamansal Tracking
 
-GT 30 karede bir ornekli ve **track ID icermiyor**, dolayisiyla MOTA/IDF1/HOTA hesaplanamaz. Hedef de bu degil: tracking yogun videoda kosuluyor, kazanc **ayni 64 GT karesinde** COCO metrikleriyle olculuyor. Boylece yeni tablo eski tabloyla birebir karsilastirilabilir kaliyor.
+Dedektörler her frame'i bağımsız değerlendirir. Ancak videoda aynı insan genellikle ardışık karelerde görünmeye devam eder. Bu nedenle son aşamada BoT-SORT tabanlı zamansal tracking kullanıldı.
 
-```mermaid
-flowchart LR
-  Video[Test videolari] --> Detect["detect_cache.py<br/>her karede cikarim"]
-  Detect --> Cache[("detections/*.json")]
-  Cache --> Track["offline_tracker.py<br/>BoT-SORT"]
-  Track --> Refine["cift yonlu interpolasyon<br/>track-seviyesi skorlama"]
-  Refine --> Eval["evaluate_tracking.py<br/>GT karelerine esle + COCOeval"]
-```
+BoT-SORT'un seçilme nedeni, klasik IoU/Kalman tabanlı takip yöntemlerine ek olarak **global motion compensation (GMC)** desteği sunmasıdır. Drone videolarında yalnızca hedef insan hareket etmez; kamera da sürekli döner, yaklaşır, uzaklaşır veya yana kayar. Bu durumda ardışık iki frame arasında bütün sahne hareket ettiği için sabit kamera varsayımına dayalı takipçiler aynı kişiyi yanlış konuma taşınmış gibi görebilir. BoT-SORT içindeki `gmc_method: sparseOptFlow` ayarı, arka plandaki genel kamera hareketini optik akışla tahmin ederek kutu eşleştirmesinden önce bu hareketi telafi eder. Bu nedenle drone videosu gibi ego-hareketin yüksek olduğu bir problemde BoT-SORT, yalnızca IoU eşleştirmesi yapan daha basit takipçilere göre daha uygun görüldü.
 
-### Tasarim Kararlari
+Bu çalışmada BoT-SORT yeni bir detector olarak kullanılmadı. Detector çıktıları önce cache'lendi, ardından BoT-SORT bu kutuları ardışık frame'lerde aynı kişiye ait track'lere bağlamak için kullanıldı. Yani BoT-SORT'un görevi insanı ilk kez bulmak değil, zaten üretilmiş detection kutularının zamansal sürekliliğini kullanarak daha kararlı bir çıktı üretmektir.
 
-**Dedektor ile tracker ayrildi.** [`tracking/detect_cache.py`](tracking/detect_cache.py) pahali GPU adimini bir kez kosup diske yazar; tracking parametreleri bu onbellek uzerinde saniyeler icinde denenebilir. Ayrica `raw` / `nms` / `botsort` asamalari **ayni dedektor ciktisindan** basladigi icin fark kesin olarak post-processing'e atfedilebilir.
+Tracking pipeline:
 
-**GT kareleri icin JPEG kullanildi** (`--use-gt-jpeg`). GT kareleri diske JPEG kalite 95 ile yazilmisti; video decode ham kare verir ve bu kucuk fark tespitleri degistirir. Degiskeni izole etmek icin GT karelerinde ayni JPEG okunur.
+1. `tracking/detect_cache.py`: Her frame için detector çıktısını JSON olarak cache'ler.
+2. `tracking/offline_tracker.py`: Cache'lenmiş bbox'ları BoT-SORT'a verir, track ID üretir, kısa boşlukları interpolasyonla doldurur ve skorları track güvenine göre günceller.
+3. `tracking/evaluate_tracking.py`: Tracking çıktısını GT framelerine geri eşler ve COCO metriklerini hesaplar.
+4. `tracking/render_demo.py`: Ham detection ve tracking sonucunu yan yana demo videosu olarak üretir.
 
-**BoT-SORT secildi, ByteTrack degil.** Drone ego-hareketi sabit-hiz Kalman varsayimini bozuyor; BoT-SORT'un `gmc_method: sparseOptFlow` kamera hareketi telafisi bu veri setinde belirleyici. `track_low_thresh` 0.1'den **0.03'e** cekildi, cunku uzak insanlar 0.17-0.25 bandinda skor aliyor ve varsayilan esik onlari ikinci esleme turundan tamamen disliyordu.
+Detection ve tracking bilinçli olarak ayrıldı. Detector çalıştırmak pahalı, tracking ise çok daha ucuzdur. Ayrıca raw, NMS ve tracking sonuçlarının aynı detector cache'inden başlaması deney tasarımını daha adil hale getirir.
 
-**Koordinat Kalman'dan degil ham tespitten alinir.** Tracker'in isi kanit uretmek (sureklilik ve kimlik), konum belirlemek degil. Kalman kutusu kullanildiginda mAP@50 ayni kaliyor ama DINO'nun mAP@50-95'i 0.641 -> 0.628'e dusuyordu.
+Raporda tracking için yalnızca final BoT-SORT sonucu gösterildi:
 
-**Silme yerine agirlik dusurme.** Kisa track'ler ve hic takip edilmeyen tespitler atilmaz, skoru `length_factor` ile kirpilir. COCO AP bir esik degil **siralama** metrigi; silmek recall tavanini gereksizce dusururdu.
+| Model | mAP@50 | mAP@50-95 | AP_Small | AP_Med | Opt. P | Opt. R | Opt. F1 | GT yakalama notu |
+|---|---:|---:|---:|---:|---:|---:|---:|---|
+| yolo11x_1536 + BoT-SORT | 0.806 | 0.539 | 0.431 | 0.614 | 0.918 | 0.750 | 0.826 | conf>=0.25 noktasında 38 kaçan GT'nin 2'si interpolasyonla geldi |
+| yolo26x_1536 + BoT-SORT | 0.775 | 0.506 | 0.381 | 0.594 | 0.922 | 0.710 | 0.802 | conf>=0.25 noktasında 43 kaçan GT'nin 1'i interpolasyonla geldi |
+| dino_full + BoT-SORT | 0.915 | 0.641 | 0.563 | 0.690 | 0.930 | 0.900 | 0.915 | conf>=0.25 noktasında 15 kaçan GT'nin 2'si interpolasyonla geldi |
+| dino_tiled + BoT-SORT | 0.930 | 0.670 | 0.576 | 0.733 | 0.944 | 0.880 | 0.911 | conf>=0.25 noktasında 12 kaçan GT'nin 1'i interpolasyonla geldi |
 
-**Interpolasyon cift yonlu.** Cevrimdisi calistigimiz icin bosluk hem gecmis hem gelecek kareden doldurulabiliyor - online bir tracker bunu yapamaz. Parametreler test setine bakilmadan a priori sabitlendi: `max_gap=15` (0.5 sn), `alpha=0.5`, `min_track_len=3`, `interp_factor=0.9`.
+Bu bilgi şu şekilde de okunabilir:
 
-### Kapi Kontrolu
+| Model | Detector'ın yakaladığı GT | Interpolasyonla eklenen GT | Tracking sonrası yakalanan GT |
+|---|---:|---:|---:|
+| yolo11x_1536 | 95 / 133 | +2 | 97 / 133 |
+| yolo26x_1536 | 90 / 133 | +1 | 91 / 133 |
+| dino_full | 118 / 133 | +2 | 120 / 133 |
+| dino_tiled | 121 / 133 | +1 | 122 / 133 |
 
-`raw` asamasi eski tablodaki degerleri **birebir** yeniden uretmeli; uretmiyorsa kare hizalamasi bozuktur ve geri kalan her sayi anlamsizdir. Dort modelin dordu de gecti (0.760 / 0.749 / 0.906 / 0.914).
+Burada önemli nokta şudur: Tracking kazancı yalnızca interpolasyonla gelen kutulardan ibaret değildir. NMS, kısa track'lerin skorunu düşürme ve güvenilir track'lerin skorunu yükseltme de mAP@50 artışına katkı verdi.
 
-### Tracking Sonuclari (filtered GT)
+## 10. Genel mAP@50 Karşılaştırması
 
-| Model | Asama | mAP@50 | mAP@50-95 | AP_Small | Opt. P | Opt. R | Opt. F1 |
-|---|---|---|---|---|---|---|---|
-| yolo11x_1536 | raw | 0.760 | 0.529 | 0.401 | 0.838 | 0.660 | 0.738 |
-| yolo11x_1536 | nms | 0.793 | 0.529 | 0.403 | 0.922 | 0.710 | 0.802 |
-| yolo11x_1536 | **botsort** | **0.806** | 0.539 | 0.431 | 0.918 | 0.750 | 0.826 |
-| yolo26x_1536 | raw | 0.749 | 0.510 | 0.380 | 0.827 | 0.680 | 0.746 |
-| yolo26x_1536 | **botsort** | **0.775** | 0.506 | 0.381 | 0.922 | 0.710 | 0.802 |
-| dino_full | raw | 0.906 | 0.650 | 0.579 | 0.974 | 0.840 | 0.902 |
-| dino_full | **botsort** | **0.915** | 0.641 | 0.563 | 0.930 | 0.900 | 0.915 |
-| dino_tiled | raw | 0.914 | 0.665 | 0.579 | 0.958 | 0.860 | 0.907 |
-| dino_tiled | **botsort** | **0.930** | 0.670 | 0.576 | 0.944 | 0.880 | 0.911 |
+Ana aşamaların mAP@50 karşılaştırması:
 
-Tracking her dort dedektorde de mAP@50'yi artirdi. Recall kazanci en belirgin: yolo11x 0.660 -> 0.750, dino_full 0.840 -> 0.900.
+| Aşama | YOLO11x | YOLO26x | DINO full | DINO tiled |
+|---|---:|---:|---:|---:|
+| Filtered baseline | 0.643 | 0.737 | 0.896 | 0.875 |
+| Fine-tune Round 1 | 0.745 | 0.758 | 0.898 | 0.914 |
+| Fine-tune Round 2 | 0.760 | 0.749 | 0.906 | 0.914 |
+| BoT-SORT sonrası | 0.806 | 0.775 | 0.915 | 0.930 |
 
----
+En yüksek sonuç `dino_tiled + BoT-SORT` ile elde edildi. Ancak hız açısından `yolo11x_1536 + BoT-SORT` daha uygulanabilir bir prototip alternatifi olarak değerlendirilebilir.
 
-## 7. Genel Sonuc: Katmanlarin Birikimli Etkisi
+## 11. Hata Analizi
 
-Ayni 64 kare / 133 kutu uzerinde, mAP@50:
+Başarılı durumlar:
 
-| Asama | yolo11x_1536 | dino_tiled |
-|---|---|---|
-| Zero-shot (COCO pretrained) | 0.643 | 0.875 |
-| + aktif ogrenme fine-tune (round 1) | 0.745 | 0.914 |
-| + fine-tune (round 2) | 0.760 | 0.914 |
-| + kare ici NMS/kapsama bastirma | 0.793 | 0.914 |
-| + BoT-SORT zamansal iyilestirme | **0.806** | **0.930** |
+- Döşemeli DINO küçük insanları belirgin şekilde daha iyi yakaladı.
+- Aktif öğrenme özellikle YOLO11x tarafında anlamlı performans artışı sağladı.
+- Tracking, detector'ın tek karelik kaçırmalarını ve skor sıralamasındaki zayıflıkları iyileştirdi.
+- `Surenen Pass Trail Running.mp4` gibi daha düzenli hareket içeren sahnelerde tracking ve DINO oldukça başarılı oldu.
 
-Toplam kazanc: yolo11x +0.163, dino_tiled +0.055 mAP@50.
+Zayıf durumlar:
 
----
+- `Stockflue Flyaround.mp4` hâlâ zorlayıcıdır. Küçük hedefler, kamera hareketi ve hedeflerin sahne içinde az piksel kaplaması YOLO tarafında performansı sınırladı.
+- DINO tiled en başarılı yöntemlerden biri olsa da hesaplama maliyeti yüksektir.
+- Tracking, detector hiç aday kutu üretmediğinde tek başına yeni nesne bulamaz; yalnızca zaman içinde görülen hedefleri daha tutarlı hale getirir.
 
-## 8. Hata Analizi
+Belirsiz durumlar:
 
-### Basarili
-- **Surenen Pass Trail Running**: dino_tiled + botsort mAP@50 **0.991**, recall 0.980. Tek ve buyuk hedef, kararli takip.
-- Dosemeli cikarim kucuk nesnelerde AP_Small'i 2.8 kat artirdi (0.201 -> 0.570).
-- Fine-tune sonrasi YOLO'nun precision'i belirgin yukseldi (0.536 -> 0.838).
+- Filtered test seti 64 frame / 133 bbox ile sınırlıdır. Bu nedenle birkaç kutuluk fark metriklerde görünür değişim oluşturabilir.
+- GT'de track ID olmadığı için MOTA/IDF1 gibi tracking metrikleri kullanılmadı. Tracking katkısı COCO detection metrikleri ve interpolasyonla geri kazanılan GT sayısı üzerinden ölçüldü.
 
-### Basarisiz / Zayif
-- **Stockflue Flyaround en zor video.** yolo11x botsort ile sadece 0.515 mAP@50; %59.6 COCO-small orani ve surekli donen kamera. dino_tiled ile 0.828'e cikiyor, yani buradaki hata **dedektor kapasitesi** kaynakli, zamansal degil.
-- **DJI_0596** metriklerin disinda tutuldu. Tam GT'de baseline yolo11x @640 bu videoda 0 tespit yapmisti.
-- **Interpolasyon kazanci beklenenden kucuk.** `conf>=0.25` calisma noktasinda dedektorun kacirdigi kutulardan interpolasyonla gelen: yolo11x 2/38, yolo26x 1/43, dino_full 2/15, dino_tiled 1/12. Yani tracking kazancinin buyuk kismi interpolasyondan degil **NMS + track-seviyesi yeniden skorlamadan** geliyor. Bunun nedeni yapisal: GT 30 karede bir ornekli, tracking'in doldurdugu kareler ise cogunlukla GT'de karsiligi olmayan aradaki karelerdir; kazanc videoda goruluyor ama seyrek GT bunu tam olcemiyor.
-- **yolo26x round 2'de geriledi** (0.758 -> 0.749). 133 kutuluk sette bu birkac kutuluk bir fark; gurultu olarak yorumlanmali.
+## 12. Metrik Seçimi
 
-### Belirsiz
-- **Surenen'de dino_tiled ~ dino_full.** `auto_grid(406, 720)` -> `(1,1)` donduruyor, yani bu videoda doseme devreye girmiyor. Filtered GT'nin 40/64'u Surenen oldugu icin iki modelin yakinligi (0.906 vs 0.914) buradan kaynakliyor; ortalama bu detayi gizliyor.
-- **Kucuk orneklem.** 133 kutuda birkac kutuluk degisim oranlarda buyuk gorunuyor. Video bazli kirilim bu yuzden ayrica raporlandi.
-- **Kalman vs ham kutu takasi dedektore bagli.** DINO'da ham kutu daha iyi (lokalizasyonu zaten temiz), YOLO'da Kalman gurultulu kutulari duzeltiyor. Tek bir dogru tercih yok.
+COCO metrikleri tercih edildi:
 
----
+- `mAP@50`: genel detection başarısını yorumlamak için ana metrik.
+- `mAP@50-95`: daha sıkı lokalizasyon kalitesini ölçer.
+- `AP_Small`: drone videolarındaki küçük insan problemi için kritik metrik.
+- `AP_Medium`: orta boy hedeflerdeki davranışı ayırmak için.
+- `Opt. Precision`, `Opt. Recall`, `Opt. F1`: pratik çalışma noktasındaki dengeyi göstermek için.
+- Süre ve FPS: doğruluk-maliyet takasını göstermek için.
 
-## 9. Metrik Secimi Gerekcesi
+## 13. Hesaplama Maliyeti
 
-- **mAP@50-95 ve mAP@50**: COCO standardi, esikten bagimsiz siralama kalitesini olcer. Tek bir conf esigi secmek zorunda kalmadan modelleri karsilastirmayi saglar.
-- **AP_Small / AP_Medium**: Bu problemin ana hata kaynagi nesne boyutu oldugu icin ayrilmis. Ortalama mAP, kucuk nesne kaybini gizliyor.
-- **Optimal P / R / F1**: PR egrisi uzerinde F1'i maksimize eden nokta. Pratikte secilecek calisma noktasinin ne verdigini gosterir; mAP bunu soylemez.
-- **s/kare ve FPS**: Dogruluk-maliyet takasini gorunur kilar. dino_tiled en dogru ama 0.3 FPS.
-- **Interpolasyonla kurtarilan kutu sayisi**: mAP bir siralama metrigi oldugu icin "kac kutu geri geldi" sorusuna cevap vermiyor; bu sayac tracking'in recall katkisinin dogrudan kaniti.
+Filtered test videoları üzerinde yoğun çıkarım süreleri yaklaşık olarak:
 
-MOT metrikleri (MOTA/IDF1) **bilincli olarak kullanilmadi**: GT'de track ID yok ve 30 kare arayla kimlik atamak belirsiz olurdu.
+| Model | Süre / frame | Yaklaşık FPS |
+|---|---:|---:|
+| YOLO11x 1536 | 0.43 - 0.47 sn | 2.5 |
+| YOLO26x 1536 | 0.44 - 0.49 sn | 2.4 |
+| DINO full | 1.74 sn | 0.6 |
+| DINO tiled | 1.65 - 8.57 sn | 0.1 - 0.3 |
 
----
+Bu nedenle tracking aşamasında önce detection çıktıları cache'lendi. Daha sonra BoT-SORT bu cache üzerinde çalıştırıldı. Böylece pahalı detector adımı tekrar tekrar çalıştırılmadan tracking ve değerlendirme yapılabildi.
 
-## 10. Hesaplama Maliyeti
+## 14. Güçlü ve Zayıf Yönler
 
-Cikarim (1874 kare, Stockflue + Surenen):
+Güçlü yönler:
 
-| Model | s/kare | Yogun cikarim | Etkin FPS |
-|---|---|---|---|
-| yolo11x_1536 | 0.43 - 0.47 | ~14 dk | 2.5 |
-| yolo26x_1536 | 0.44 - 0.49 | ~15 dk | 2.4 |
-| dino_full | 1.74 | ~54 dk | 0.6 |
-| dino_tiled | 1.65 (1x1) - 8.57 (2x2+tam) | ~131 dk | 0.1 - 0.3 |
+- Tüm veri seti yerine sınırlı sayıda frame etiketlendi.
+- Video seçimi ve train/test ayrımı veri analizine dayandırıldı.
+- Baseline, tiled inference, active learning, fine-tune ve tracking ayrı ayrı ölçüldü.
+- Her tespit için skor üretildi ve COCO metrikleriyle değerlendirildi.
+- Demo videosu ile nitel sonuç gösterilebilir hale getirildi.
 
-Toplam onbellek uretimi ~3.6 saat. Tracking asamasi onbellek uzerinde saniyeler surer (yalnizca video decode + hafif esleme).
+Zayıf yönler:
 
-Egitim: Kaggle T4, 50 epoch, `freeze=23` ile YOLO basina yaklasik 1-2 saat; DINO dosemeli egitim benzer mertebede.
+- Test seti sınırlı büyüklükte.
+- DINO tiled yüksek doğruluk verse de gerçek zamanlı kullanım için yavaş.
+- Offline tracking gelecek frame bilgisinden faydalanabildiği için gerçek zamanlı sistemle birebir aynı değildir.
 
-**Pratik oneri:** dino_tiled en dogru ama 0.1-0.3 FPS ile gercek zamanli degil. Uygulanabilir kombinasyon **yolo11x + BoT-SORT** (0.806 mAP@50, ~2.5 FPS); dino_tiled cevrimdisi ogretmen/analiz rolunde birakilmali.
 
----
+## 15. Kullanılan Kaynaklar
 
-## 11. Guclu ve Zayif Yonler
+- Kaggle Drone Videos veri seti
+- Grounding DINO (`IDEA-Research/grounding-dino-base`)
+- Ultralytics YOLO
+- BoT-SORT
+- CVAT
+- COCO evaluation / `pycocotools`
 
-**Guclu**
-- Arsivin yalnizca %1.8'i etiketlenerek 0.930 mAP@50'ye ulasildi.
-- Uc bagimsiz iyilestirme ekseni (cikarim, veri secimi, zamansal) ayri ayri olculebilir sekilde ayrildi.
-- Kapi kontrolu ile kare hizalamasi dogrulandi; tracking sonuclari eski tabloyla birebir karsilastirilabilir.
-- Halusinasyon skor yerine geometriyle filtrelendi - esik yukseltmenin ise yaramadigi durumda dogru cozum.
-- Tracking parametreleri test setine bakilmadan sabitlendi.
-
-**Zayif**
-- Test seti kucuk (filtered 133 kutu) ve en zor video (DJI_0596) metriklerin disinda.
-- Checkpoint secimi GT test setine bakilarak yapildi - iyimser bias.
-- Aktif ogrenme etiketleri tek kisi tarafindan uretildi, etiketleyici tutarliligi olculmedi.
-- Interpolasyon cift yonlu, yani **nedensel degil**: gercek zamanli sistemde yalnizca `track_buffer` ile geriye donuk doldurma mumkun olurdu.
-- On-etiketler DINO'dan geldigi icin GT'de kalinti ogretmen yanliligi olabilir.
-
----
-
-## 12. Tekrar Uretilebilirlik
-
-```bash
-# 1. Envanter ve olcek analizi
-python3 analyze_video_inventory.py
-
-# 2. Test seti kareleri + DINO on-etiket (CVAT XML)
-python3 prepare_test_set.py
-
-# 3. Baseline / fine-tune degerlendirmesi
-python3 evaluate_on_gt.py --models yolo11x_1536,yolo26x_1536,dino_full,dino_tiled
-
-# 4. Tracking: yogun tespit onbellegi
-python3 tracking/detect_cache.py \
-  --models yolo11x_1536,yolo26x_1536,dino_full,dino_tiled \
-  --videos Stockflue_Flyaround,Surenen_Pass_Trail_Running
-
-# 5. Cevrimdisi tracking asamalari
-python3 tracking/offline_tracker.py \
-  --models yolo11x_1536,yolo26x_1536,dino_full,dino_tiled \
-  --stages raw,nms,botsort
-
-# 6. GT uzerinde degerlendirme
-python3 tracking/evaluate_tracking.py \
-  --models yolo11x_1536,yolo26x_1536,dino_full,dino_tiled \
-  --stages raw,nms,botsort
-
-# 7. Yan yana demo videosu
-python3 tracking/render_demo.py --slug Stockflue_Flyaround --model yolo11x_1536
-```
-
-Egitim Kaggle uzerinde: [`kaggle_active_learning_selection.ipynb`](kaggle_active_learning_selection.ipynb), [`kaggle_finetune_yolo.ipynb`](kaggle_finetune_yolo.ipynb), [`kaggle_finetune_dino_active.ipynb`](kaggle_finetune_dino_active.ipynb).
-
-### Ciktilar
-
-| Cikti | Yol |
-|---|---|
-| Envanter | [`results/video_inventory_summary.md`](results/video_inventory_summary.md) |
-| Baseline (tam GT) | [`results/evaluation/summary.md`](results/evaluation/summary.md) |
-| Zero-shot (filtered) | [`results/evaluation/summary_filtered.md`](results/evaluation/summary_filtered.md) |
-| Fine-tune round 1 / 2 | [`results/evaluation/summary_tuned.md`](results/evaluation/summary_tuned.md), [`results/evaluation/summary_tuned_round2.md`](results/evaluation/summary_tuned_round2.md) |
-| Tracking | [`results/evaluation/summary_tracking.md`](results/evaluation/summary_tracking.md) |
-| Checkpoint secim kaydi | [`yolo11_select.md`](yolo11_select.md) |
-| Demo videosu | `results/tracking/demo/Stockflue_Flyaround__yolo11x_1536__demo.mp4` |
-| Ornek kare | `results/tracking/demo/ornek_kare_258.jpg` |
-
----
-
-## 13. Kaynaklar
-
-- Drone Videos veri seti: https://www.kaggle.com/datasets/kmader/drone-videos
-- Grounding DINO: `IDEA-Research/grounding-dino-base` (Liu et al., 2023)
-- Ultralytics YOLO11 / YOLO26: https://github.com/ultralytics/ultralytics
-- BoT-SORT: Aharon et al., 2022 - https://github.com/NirAharon/BoT-SORT
-- ByteTrack: Zhang et al., 2022
-- SAHI (dosemeli cikarim fikri): Akyon et al., 2022
-- COCO metrikleri: `pycocotools`
-- CVAT: https://www.cvat.ai

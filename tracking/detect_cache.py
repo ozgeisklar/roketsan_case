@@ -17,13 +17,24 @@ OUT_DIR = os.path.join(ROOT, "results", "tracking", "detections")
 # slug -> video yolu. Slug'lar prepare_test_set.slugify() çıktısıyla aynı olmalı,
 # çünkü GT dosya adları (Stockflue_Flyaround_f000030.jpg) o fonksiyonla üretildi.
 VIDEOS = {
-    "Stockflue_Flyaround": "archive/test/Stockflue Flyaround.mp4",
-    "Surenen_Pass_Trail_Running": "archive/test/Surenen Pass Trail Running.mp4",
+    "Stockflue_Flyaround": "dataset/archive/test/Stockflue Flyaround.mp4",
+    "Surenen_Pass_Trail_Running": "dataset/archive/test/Surenen Pass Trail Running.mp4",
 }
 
 
+def resolve_path(path):
+    candidates = [
+        os.path.join(ROOT, path),
+        os.path.join(ROOT, "weights", path),
+    ]
+    for candidate in candidates:
+        if os.path.exists(candidate):
+            return candidate
+    return path
+
+
 def yolo_predictor(weights, imgsz):
-    model = YOLO(os.path.join(ROOT, weights))
+    model = YOLO(resolve_path(weights))
 
     def predict(frame):
         result = model.predict(frame, imgsz=imgsz, classes=[0], verbose=False, conf=0.01)[0]
@@ -32,11 +43,11 @@ def yolo_predictor(weights, imgsz):
     return predict
 
 
-def dino_predictor(tiled):
+def dino_predictor(tiled, model_name="IDEA-Research/grounding-dino-base"):
     # Import burada: tiled_dino transformers'i cekiyor, YOLO kosusunun buna ihtiyaci yok.
     from tiled_dino import TiledGroundingDino
 
-    dino = TiledGroundingDino(model_name=os.path.join(ROOT, "dino_tuned_round2"))
+    dino = TiledGroundingDino(model_name=resolve_path(model_name))
 
     def predict(frame):
         if tiled:
@@ -47,10 +58,23 @@ def dino_predictor(tiled):
 
 
 CONFIGS = {
+    # Baseline modeller
+    "yolo11x_1536_baseline": lambda: yolo_predictor("yolo11x.pt", 1536),
+    "yolo26x_1536_baseline": lambda: yolo_predictor("yolo26x.pt", 1536),
+    "dino_full_baseline": lambda: dino_predictor(tiled=False),
+    "dino_tiled_baseline": lambda: dino_predictor(tiled=True),
+
+    # Round 2 fine-tuned modeller
+    "yolo11x_1536_tuned": lambda: yolo_predictor("yolo11x_tuned_round2.pt", 1536),
+    "yolo26x_1536_tuned": lambda: yolo_predictor("yolo26x_tuned_round2.pt", 1536),
+    "dino_full_tuned": lambda: dino_predictor(tiled=False, model_name="dino_tuned_round2"),
+    "dino_tiled_tuned": lambda: dino_predictor(tiled=True, model_name="dino_tuned_round2"),
+
+    # Eski isimler tracking/evaluation uyumlulugu icin round 2 tuned modellere isaret eder.
     "yolo11x_1536": lambda: yolo_predictor("yolo11x_tuned_round2.pt", 1536),
     "yolo26x_1536": lambda: yolo_predictor("yolo26x_tuned_round2.pt", 1536),
-    "dino_full": lambda: dino_predictor(tiled=False),
-    "dino_tiled": lambda: dino_predictor(tiled=True),
+    "dino_full": lambda: dino_predictor(tiled=False, model_name="dino_tuned_round2"),
+    "dino_tiled": lambda: dino_predictor(tiled=True, model_name="dino_tuned_round2"),
 }
 
 
