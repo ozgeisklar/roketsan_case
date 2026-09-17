@@ -6,17 +6,12 @@ Bu repo, Kaggle Drone Videos veri setinde **insan (person)** sinifini tespit etm
 
 Python ortamini aktiflestirin:
 
-```bash
-conda activate roketsan
-```
-
 Gerekli temel paketler:
 
 ```bash
-pip install ultralytics transformers torch torchvision opencv-python pycocotools pillow numpy matplotlib
+pip install -r requirements.txt
 ```
 
-Not: CUDA destekli PyTorch kurulumu sisteminize gore degisebilir. Lokal GPU kullanilacaksa PyTorch'un CUDA ile uyumlu kuruldugundan emin olun.
 
 ## 2. Veri ve Agirlik Dizini
 

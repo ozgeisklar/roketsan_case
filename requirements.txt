@@ -1,0 +1,11 @@
+numpy
+opencv-python
+pillow
+matplotlib
+torch
+torchvision
+transformers
+ultralytics
+pycocotools
+lap
+scipy
