@@ -195,13 +195,8 @@ tracking__dino_tiled___bot_sort.mp4
 Ana rapor:
 
 ```text
-RAPOR_DETAYLI.md
+RAPOR.md
 ```
-
-Daha kisa ozet rapor:
-
-```text
-RAPOR_KISA.md
 ```
 
 Onemli sonuc dosyalari:
